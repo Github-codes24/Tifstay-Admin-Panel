@@ -18,8 +18,8 @@ export default function OffersPage() {
   const [deleteDialog, setDeleteDialog] = useState({ open: false });
 
   const [filters, setFilters] = useState({
-    offerOn: ['PG/Hostel Booking'],
-    status: ['Upcoming']
+    offerOn: [],
+    status: []
   });
 
   const CheckboxItem = ({ label, checked, onChange, highlight }) => (
@@ -89,6 +89,7 @@ export default function OffersPage() {
       );
     }
     
+    // Apply offer filters only if any are selected
     if (filters.offerOn.length > 0) {
       data = data.filter(o => {
         if (filters.offerOn.includes('PG/Hostel Booking') && o.offerOn === 'PG/Hostel') return true;
@@ -97,6 +98,7 @@ export default function OffersPage() {
       });
     }
     
+    // Apply status filters only if any are selected
     if (filters.status.length > 0) {
       data = data.filter(o => 
         filters.status.some(s => o.status === s.toLowerCase())
@@ -305,7 +307,6 @@ export default function OffersPage() {
                       label="PG/Hostel Booking" 
                       checked={filters.offerOn.includes('PG/Hostel Booking')} 
                       onChange={(next) => handleFilterChange('offerOn', 'PG/Hostel Booking', next)} 
-                      highlight 
                     />
                     <CheckboxItem 
                       label="Tiffin/Restaurant Order" 
@@ -320,7 +321,6 @@ export default function OffersPage() {
                         label="Upcoming" 
                         checked={filters.status.includes('Upcoming')} 
                         onChange={(next) => handleFilterChange('status', 'Upcoming', next)} 
-                        highlight 
                       />
                       <CheckboxItem 
                         label="Ongoing" 

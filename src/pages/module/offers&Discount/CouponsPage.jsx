@@ -35,8 +35,8 @@ export default function CouponsPage() {
   });
   
   const [filters, setFilters] = useState({
-    offerOn: ['PG/Hostel Booking'],
-    status: ['Upcoming']
+    offerOn: [],
+    status: []
   });
 
   const [coupons, setCoupons] = useState([
@@ -125,7 +125,7 @@ export default function CouponsPage() {
       );
     }
 
-    // Apply offer filters
+    // Apply offer filters only if any are selected
     if (filters.offerOn.length > 0) {
       filtered = filtered.filter(coupon => {
         if (filters.offerOn.includes('PG/Hostel Booking') && coupon.offerOn === 'PG/Hostel') {
@@ -138,7 +138,7 @@ export default function CouponsPage() {
       });
     }
 
-    // Apply status filters
+    // Apply status filters only if any are selected
     if (filters.status.length > 0) {
       filtered = filtered.filter(coupon => {
         return filters.status.some(status => 
@@ -364,13 +364,13 @@ export default function CouponsPage() {
                     </div>
                 <div className="space-y-6">
                   <div className="space-y-3">
-                    <CheckboxItem label="PG/Hostel Booking" checked={filters.offerOn.includes('PG/Hostel Booking')} onChange={(next)=>handleFilterChange('offerOn','PG/Hostel Booking', next)} highlight />
+                    <CheckboxItem label="PG/Hostel Booking" checked={filters.offerOn.includes('PG/Hostel Booking')} onChange={(next)=>handleFilterChange('offerOn','PG/Hostel Booking', next)} />
                     <CheckboxItem label="Tiffin/Restaurant Order" checked={filters.offerOn.includes('Tiffin/Restaurant Order')} onChange={(next)=>handleFilterChange('offerOn','Tiffin/Restaurant Order', next)} />
                         </div>
                   <div className="pt-2">
                     <h4 className="text-[22px] font-semibold text-[#07021C] mb-3">Status</h4>
                     <div className="space-y-3">
-                      <CheckboxItem label="Upcoming" checked={filters.status.includes('Upcoming')} onChange={(next)=>handleFilterChange('status','Upcoming', next)} highlight />
+                      <CheckboxItem label="Upcoming" checked={filters.status.includes('Upcoming')} onChange={(next)=>handleFilterChange('status','Upcoming', next)} />
                       <CheckboxItem label="Ongoing" checked={filters.status.includes('Ongoing')} onChange={(next)=>handleFilterChange('status','Ongoing', next)} />
                       <CheckboxItem label="Expired" checked={filters.status.includes('Expired')} onChange={(next)=>handleFilterChange('status','Expired', next)} />
                       </div>

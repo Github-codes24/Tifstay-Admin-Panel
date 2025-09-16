@@ -17,9 +17,10 @@ export default function DiscountPage() {
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState({ open: false });
 
+  // Removed pre-applied filters - now starts with empty arrays
   const [filters, setFilters] = useState({ 
-    offerOn: ['PG/Hostel Booking'], 
-    status: ['Upcoming'] 
+    offerOn: [], 
+    status: [] 
   });
 
   const CheckboxItem = ({ label, checked, onChange, highlight }) => (
@@ -83,6 +84,7 @@ export default function DiscountPage() {
       );
     }
     
+    // Only apply filters if they are selected
     if (filters.offerOn.length > 0) {
       data = data.filter(d => 
         (filters.offerOn.includes('PG/Hostel Booking') && d.offerOn === 'PG/Hostel') || 

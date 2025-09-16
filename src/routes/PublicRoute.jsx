@@ -28,6 +28,10 @@ import Reviews from "../pages/module/Reviews";
 import Security from "../pages/module/securityLog";
 import ChatList from "../pages/module/ChatList/chatList";
 import ChatDetails from "../pages/module/ChatList/chatListDetails";
+import CashbackApp from "../pages/module/Settings/Cashback";
+import CommissionApp from "../pages/module/Settings/Commission";
+import TaxGSTApp from  "../pages/module/Settings/Tax&Gst";
+import SetPenaltyApp from "../pages/module/Settings/SetPenalty";
 
 function PublicRoute() {
   const initialUsers = [
@@ -602,6 +606,12 @@ function PublicRoute() {
         <Route path="chats" element={<ChatList />} />
         <Route path="chats/:chatId" element={<ChatDetails />} />
         <Route path="security" element={<Security />} />
+
+        {/* settings */}
+        <Route path ="settings/cashback" element={<CashbackApp />} />
+        <Route path="settings/commission" element={<CommissionApp />} />
+        <Route path="settings/Tax & Gst" element={<TaxGSTApp />} />
+        <Route path="settings/Set Penalty" element={<SetPenaltyApp />} />
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFound />} />
