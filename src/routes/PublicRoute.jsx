@@ -516,8 +516,7 @@ function PublicRoute() {
   const [listingData, setListingData] = useState(pgListings);
   const [booking, setBooking] = useState(bookingDetails);
   const [restaurants, setRestaurants] = useState(restaurantListings);
-  const [overView, setOverview] = useState(bookingDetails);
-  const [dashboardData ,setDashboardData] =useState(dashboardDatas)
+  const [dashboardData, setDashboardData] = useState(dashboardDatas);
 
   // Component to render details based on user role
   function RenderDetailsByRole({ users, setUsers }) {
@@ -575,10 +574,13 @@ function PublicRoute() {
       
       {/* Protected Routes with Layout */}
       <Route path="/" element={<Layout />}>
-
-      <Route path="dashboard" element={<Dashboard users={dashboardData} setUsers={setDashboardData}/>} /> dashboard/alerts
-<Route path="dashboard/alerts" element={<Alerts />} />
-        {/* -------- User Management -------- */}
+        {/* Dashboard */}
+        <Route path="dashboard" element={<Dashboard users={dashboardData} setUsers={setDashboardData} />} />
+        <Route path="dashboard/alerts" element={<Alerts />} />
+        <Route path="/dashboard/pg-hostel-overview" element={<OverviewPage title="PG / Hostel Overview" data={pgHostelData} />}/>
+        <Route path="/dashboard/tiffin-restaurant-overview" element={<OverviewPage title="Tiffin / Restaurant Overview" data={tiffinData} />} />
+        <Route path="/dashboard/user-overview" element={<OverviewPage title="User Overview" data={userData} />} />
+        {/* User Management */}
         <Route path="users/:role" element={<Owner users={users} setUsers={setUsers} />} />
         <Route path="users/:role/create" element={<CreateOwner users={users} setUsers={setUsers} />} />
         <Route path="users/:role/edit/:id" element={<EditOwner users={users} setUsers={setUsers} />} />
@@ -601,20 +603,23 @@ function PublicRoute() {
         <Route path="bookings/:booking" element={<Booking users={booking} setUsers={setBooking} />} />
         <Route path="bookings/:booking/:id" element={<BookingDetails users={booking} setUsers={setBooking} />} />
 
-        {/* -------- Payment & Wallet -------- */}
-        <Route path="/payments/:payment" element={<OverView users={overView} setUsers={setOverview} />}/>
-
-        {/*Rating and reviews part */}
-        <Route path="/reviews" element={<Reviews />} />
-
-        {/*Chatlist part */}
-        <Route path="/chats" element={<ChatList />} />
-        <Route path="/chats/:chatId" element={<ChatDetails />} />
-
-         {/*Security Log part */}
-        <Route path="/security" element={<Security />} />
+        {/* Payment & Wallet */}
+        <Route path="payments/:payment" element={<OverView users={paymentData}  />} />
+         <Route path="/payment/pending-payouts" element={<HostelPayouts />} />
+         <Route path="/payment/tiffin-pending-payouts" element={<TiffinPayouts />} />
+         <Route path="/payment/transactions" element={<WalletTransactions />} />
 
 
+        {/* <Route path="payments/:payment" element={<OverView users={paymentData}  />} /> */}
+
+        {/* Other Features */}
+        <Route path="reviews" element={<Reviews />} />
+        <Route path="chats" element={<ChatList />} />
+        <Route path="chats/:chatId" element={<ChatDetails />} />
+        <Route path="security" element={<Security />} />
+
+        {/* 404 Not Found */}
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
