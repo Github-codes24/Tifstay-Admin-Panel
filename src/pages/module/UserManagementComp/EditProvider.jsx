@@ -1,82 +1,46 @@
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { Navigate, NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Navigate, NavLink, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import logo from "../../../assets/image.png";
 import roleConfig from "./roleConfig";
 
 function EditProvider({ users, setUsers }) {
+  
   const navigate = useNavigate();
-  const location = useLocation();
-const { id } = useParams();
-const [isEditable ,setIsEditable] = useState(false);
- const [showPopup, setShowPopup] = useState(false);
- const { role } = useParams(); 
-   const cfg = roleConfig[role] ?? roleConfig.guests;
+  const { id, role } = useParams();
+  const [isEditable] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
+  // find user early
+  const user = users.find((u) => u.id === parseInt(id));
 
+  // define states safely (with fallback values if user is undefined)
+  const [profile, setProfile] = useState(user?.profile ?? "");
+  const [name, setName] = useState(user?.name ?? "");
+  const [phone, setPhone] = useState(user?.phone ?? "");
+  const [email, setEmail] = useState(user?.email ?? "");
+  
+  const [address, setAddress] = useState(user?.address ?? "");
+ 
+  const [password, setPassword] = useState(user?.password ?? "");
+  const [accountNumber, setAccountNumber] = useState(user?.accountNumber ?? "");
+  const [ifscCode, setIfscCode] = useState(user?.ifscCode ?? "");
+  const [accountType, setAccountType] = useState(user?.accountType ?? "");
+  const [accountHolderName, setAccountHolderName] = useState(user?.accountHolderName ?? "");
 
-    const user = users.find((u) => u.id === parseInt(id));
-  //   const [showPopup, setShowPopup] = useState(false);
+  const cfg = roleConfig[role] ?? roleConfig.guests;
 
-    if (!user) {
-      return (
-        <div className="p-6 bg-white rounded shadow">
-          <h2 className="text-xl font-semibold">Guest Details</h2>
-          <p>No user data found for ID: {id}</p>
-        </div>
-      );
-    }
-
-
-const [profile, setProfile] = useState(user.profile);
-const [name, setName] = useState(user.name);
-const [phone, setPhone] = useState(user.phone);
-const [email, setEmail] = useState(user.email);
-const [dob, setDob] = useState(user.dob);
-const [address, setAddress] = useState(user.address);
-const [status, setStatus] = useState(user.status);
-const [aadhaar, setAadhaar] = useState(user.aadhaar);
-const [password, setPassword] = useState(user.password);
-const [accountNumber, setAccountNumber] = useState(user.accountNumber);
-const [ifscCode, setIfscCode] = useState(user.ifscCode);
-const [accountType, setAccountType] = useState(user.accountType);
-const [accountHolderName, setAccountHolderName] = useState(user.accountHolderName);
-
-  //   const handleConfirm = () => {
-  //     setUsers((prev) =>
-  //       prev.map((u) =>
-  //         u.id === user.id
-  //           ? { ...u, status: u.status === "Active" ? "Blocked" : "Active" }
-  //           : u
-  //       )
-  //     );
-  //     setShowPopup(false);
-  //   };
-
-  const handleSave=()=>{
-    const updateUser ={
-      ...user,
-      name,
-      profile,
-      phone,
-      email,
-      dob,
-      address,
-      status,
-      aadhaar,
-      password,
-      accountNumber,
-      ifscCode,
-      accountType,
-      accountHolderName,
-    };
-
-    setUsers((prevUser)=>
-      prevUser.map((u)=>(u.id ===user.id ?updateUser:u))
+  // now safely return if user not found
+  if (!user) {
+    return (
+      <div className="p-6 bg-white rounded shadow">
+        <h2 className="text-xl font-semibold">Guest Details</h2>
+        <p>No user data found for ID: {id}</p>
+      </div>
     );
-    setIsEditable(false);
-  };
+  }
 
+  
   const handleConfirm =()=>{
     setUsers((prev)=>
       prev.map((u)=>u.id === user.id? {...u,status: u.status ==="Active" ?"Blocked" :"Active"}:u)
@@ -101,7 +65,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
 
       {/* Main Card */}
       <div className="bg-white px-4 py-4 flex flex-col gap-6 items-center">
-        <div className="w-full min-h-[600px] p-6 rounded-[8px] bg-white shadow border border-[#D9D9D9] flex flex-col gap-6 border border-[#A5A5A5]">
+        <div className="w-full min-h-[600px] p-6 rounded-[8px] bg-white shadow flex flex-col gap-6 border border-[#A5A5A5]">
           {/* Profile Info */}
 
           {/* Form Section */}
@@ -302,7 +266,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
 
         {showPopup && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40">
-            <div className="bg-white rounded-lg shadow-lg p-6 w-[450px]  flex flex-col gap-4 flex flex-col items-center">
+            <div className="bg-white rounded-lg shadow-lg p-6 w-[450px]  flex flex-col gap-4  items-center">
               <img src={logo} alt="" className="w-[246px] h-[56px] "/>
               <h2 className="text-lg font-semibold">{user.status=="Active" ? "Block User" : "Unblock User"}</h2>
               <p className="text-[#666060] text-[16px] font-inter font-regular font-semibold text-center ">
@@ -330,14 +294,11 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
 
           </div>
         )}
-            <NavLink
-            to={`/${role}/edit/${user.id}`}
+            <NavLink to={`/users/${role}/edit/${user.id}`}
             >
                <button  className="w-[200px] h-[40px] bg-[#004AAD] rounded-[8px] text-white">
           Edit
         </button>
-
-              
             </NavLink>
            
        

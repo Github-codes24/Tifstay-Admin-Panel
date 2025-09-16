@@ -90,7 +90,7 @@ const menuItems = [
       },
       {
         label: "Wallet Transactions",
-        path: "/payments/wallet-transactions",
+        path: "/payment/transactions",
         icon: <IoMdRestaurant className="w-5 h-5" />,
       },
       {

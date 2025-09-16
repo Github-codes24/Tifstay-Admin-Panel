@@ -1,14 +1,14 @@
-import {
-  BrowserRouter as Router
-} from "react-router-dom";
-import './App.css'
+import { BrowserRouter as Router } from "react-router-dom";
+import { UserDataProvider } from "./context/UserDataProvider"; // ✅
 import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   return (
-    <Router>
-      <PublicRoute />
-    </Router>
+    <UserDataProvider>
+      <Router>
+        <PublicRoute />
+      </Router>
+    </UserDataProvider>
   );
 }
 
