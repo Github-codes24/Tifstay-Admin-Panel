@@ -30,7 +30,6 @@ function EditProvider({ users, setUsers }) {
 
   const cfg = roleConfig[role] ?? roleConfig.guests;
 
-<<<<<<< HEAD
   // now safely return if user not found
   if (!user) {
     return (
@@ -38,64 +37,6 @@ function EditProvider({ users, setUsers }) {
         <h2 className="text-xl font-semibold">Guest Details</h2>
         <p>No user data found for ID: {id}</p>
       </div>
-=======
-    if (!user) {
-      return (
-        <div className="p-6 bg-white rounded shadow">
-          <h2 className="text-xl font-semibold">Guest Details</h2>
-          <p>No user data found for ID: {id}</p>
-        </div>
-      );
-    }
-
-    <div>Kartik</div>
-
-const [profile, setProfile] = useState(user.profile);
-const [name, setName] = useState(user.name);
-const [phone, setPhone] = useState(user.phone);
-const [email, setEmail] = useState(user.email);
-const [dob, setDob] = useState(user.dob);
-const [address, setAddress] = useState(user.address);
-const [status, setStatus] = useState(user.status);
-const [aadhaar, setAadhaar] = useState(user.aadhaar);
-const [password, setPassword] = useState(user.password);
-const [accountNumber, setAccountNumber] = useState(user.accountNumber);
-const [ifscCode, setIfscCode] = useState(user.ifscCode);
-const [accountType, setAccountType] = useState(user.accountType);
-const [accountHolderName, setAccountHolderName] = useState(user.accountHolderName);
-
-  //   const handleConfirm = () => {
-  //     setUsers((prev) =>
-  //       prev.map((u) =>
-  //         u.id === user.id
-  //           ? { ...u, status: u.status === "Active" ? "Blocked" : "Active" }
-  //           : u
-  //       )
-  //     );
-  //     setShowPopup(false);
-  //   };
-
-  const handleSave=()=>{
-    const updateUser ={
-      ...user,
-      name,
-      profile,
-      phone,
-      email,
-      dob,
-      address,
-      status,
-      aadhaar,
-      password,
-      accountNumber,
-      ifscCode,
-      accountType,
-      accountHolderName,
-    };
-
-    setUsers((prevUser)=>
-      prevUser.map((u)=>(u.id ===user.id ?updateUser:u))
->>>>>>> 45da344db923fb2b040b35dc7d4dae786a2154f5
     );
   }
 
