@@ -31,8 +31,58 @@ import ChatDetails from "../pages/module/ChatList/chatListDetails";
 import Banner from "../pages/module/cms/Banner/banners";
 import CreateBanner from "../pages/module/cms/Banner/CreateBanner";
 import EditBanner from "../pages/module/cms/Banner/EditBanner";
+import StaticPage from "../pages/module/cms/StaticPage/StaticPage";
+import CreateStaticPage from "../pages/module/cms/StaticPage/CreateStaticPage";
+import ViewStaticPage from "../pages/module/cms/StaticPage/ViewStaticPage";
+import EditStaticPage from "../pages/module/cms/StaticPage/EditStaticPage";
+import NotificationManagement from "../pages/module/cms/notifiactionManagment/NotificationManagement";
 
 function PublicRoute() {
+  const initialPages = [
+    {
+      id: 1,
+      title: "About Us",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Etiam malesuada pellentesque mi et id in scelerisque. Morbi id adipiscing pretium id quam faucibus. Leo at elit quisque elementum...",
+      lastUpdated: "20/09/2025",
+    },
+    {
+      id: 2,
+      title: "Terms & Conditions",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Morbi sed ultrices arcu quis. Dignissim tempus nec ut congue sit tincidunt. Lorem lorem vitae erat nulla tristique nunc senectus scel...",
+      lastUpdated: "10/08/2025",
+    },
+    {
+      id: 3,
+      title: "Privacy Policy",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. At pellentesque commodo volutpat netus pretium nulla amet ut. Gravida nibh imperdiet aliquam mauris consectetur magna vel dia...",
+      lastUpdated: "10/08/2025",
+    },
+    {
+      id: 4,
+      title: "Refund Policy",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Id nisl faucibus interdum habitant morbi vitae odio volutpat magna. Mauris mattis justo tincidunt varius nec. Lacus sapien feugiat or...",
+      lastUpdated: "01/01/2025",
+    },
+    {
+      id: 5,
+      title: "Contact Us",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      lastUpdated: "12/02/2025",
+    },
+    {
+      id: 6,
+      title: "Shipping Policy",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+      lastUpdated: "14/03/2025",
+    },
+  ];
+
   const initialUsers = [
     {
       id: 1,
@@ -515,6 +565,7 @@ function PublicRoute() {
 
   const [banners, setBanners] = useState([]);
   const [users, setUsers] = useState(initialUsers);
+  const [pages, setPages] = useState(initialPages);
   const [listingData, setListingData] = useState(pgListings);
   const [booking, setBooking] = useState(bookingDetails);
   const [restaurants, setRestaurants] = useState(restaurantListings);
@@ -646,8 +697,8 @@ function PublicRoute() {
         <Route path="chats" element={<ChatList />} />
         <Route path="chats/:chatId" element={<ChatDetails />} />
         <Route path="security" element={<Security />} />
-        {/* <Route path="cms/banners" element={<Banners />} /> */}
 
+        {/* Banner part */}
         <Route
           path="cms/banners"
           element={<Banner banners={banners} setBanners={setBanners} />}
@@ -658,9 +709,32 @@ function PublicRoute() {
         />
 
         <Route
-  path="/cms/banner/edit/:id"
-  element={<EditBanner banners={banners} setBanners={setBanners} />}
-/>
+          path="/cms/banner/edit/:id"
+          element={<EditBanner banners={banners} setBanners={setBanners} />}
+        />
+
+        {/* Static Page */}
+        <Route
+          path="/cms/staticpage"
+          element={<StaticPage pages={pages} setPages={setPages} />}
+        />
+        <Route
+          path="/cms/static-page/create"
+          element={<CreateStaticPage setPages={setPages} />}
+        />
+        <Route
+          path="/cms/static-page/view/:id"
+          element={<ViewStaticPage pages={pages} />}
+        />
+        <Route
+          path="/cms/static-page/edit/:id"
+          element={<EditStaticPage pages={pages} setPages={setPages} />}
+        />
+         
+          <Route
+          path="cms/notification"
+          element={<NotificationManagement/>}
+        />
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFound />} />

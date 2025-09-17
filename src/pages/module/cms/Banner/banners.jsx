@@ -227,7 +227,7 @@ const filteredBanners =
       {/* Delete Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <div className="bg-white rounded-md p-6 w-[400px] flex flex-col gap-4">
+          <div className="bg-white rounded-lg p-6 w-[400px] flex flex-col gap-4">
             <img src={logo} alt="Logo" className=" content-center"/>
             <h2 className="text-lg font-semibold text-center">
               Remove Banner

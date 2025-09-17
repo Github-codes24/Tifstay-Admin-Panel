@@ -146,7 +146,8 @@ const menuItems = [
     type: "dropdown",
     children: [
       { label: "Banner", path: "/cms/banners", icon: <FaUser className="w-5 h-5" /> },
-      { label: "Static Pages", path: "/cms/pages", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Static Pages", path: "/cms/staticpage", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Notification Management", path: "/cms/notification", icon: <FaUser className="w-5 h-5" /> },
       
     ],
   },
