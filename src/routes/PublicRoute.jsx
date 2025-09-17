@@ -16,7 +16,7 @@ import DiscountPage from "../pages/module/offers&Discount/discount/DiscountPage"
 import NotFound from "../pages/module/offers&Discount/notFound";
 import Booking from "../pages/module/booking&Orders/Booking";
 import BookingDetails from "../pages/module/booking&Orders/BookingDetails";
-import OverView from "../pages/module/payment&Wallet/OverView";
+import OverView from "../pages/module/payment&Wallet/paymentOverview/OverView";
 import Login from "../pages/auth/Login";
 import VerifyOTP from "../pages/auth/VerifyOTP";
 import ForgotPassword from "../pages/auth/ForgotPassword";
@@ -24,10 +24,16 @@ import ResetPassword from "../pages/auth/ResetPassword";
 import PasswordResetSuccessfully from "../pages/auth/PasswordResetSuccefully";
 import Dashboard from "../pages/module/dashBoard/Dashboard";
 import Alerts from "../pages/module/dashBoard/Alerts";
-import Reviews from "../pages/module/reviews";
-import Security from "../pages/module/securityLog";
+import Reviews from "../pages/module/ratings&Review/Reviews";
+import Security from "../pages/module/security&Logs/Security&Log";
 import ChatList from "../pages/module/ChatList/chatList";
 import ChatDetails from "../pages/module/ChatList/chatListDetails";
+import Banner from "../pages/module/cms/Banner/banners";
+import StaticPage from "../pages/module/cms/StaticPage/StaticPage";
+import EditStaticPage from "../pages/module/cms/StaticPage/EditStaticPage";
+import NotificationManagement from "../pages/module/cms/notifiactionManagment/NotificationManagement";
+import EditBanner from "../pages/module/cms/Banner/EditBanner";
+import CreateBanner from "../pages/module/cms/Banner/CreateBanner";
 
 function PublicRoute() {
   const initialPages = [
@@ -689,6 +695,30 @@ function PublicRoute() {
         <Route path="chats" element={<ChatList />} />
         <Route path="chats/:chatId" element={<ChatDetails />} />
         <Route path="security" element={<Security />} />
+
+        {/* CMS */}
+        <Route
+          path="cms/staticpage"
+          element={<StaticPage pages={pages} setPages={setPages} />}
+        />
+        <Route
+          path="cms/staticpage/edit/:id"
+          element={<EditStaticPage pages={pages} setPages={setPages} />}
+        />
+        <Route path="cms/notification" element={<NotificationManagement />} />
+        <Route
+          path="cms/banners"
+          element={<Banner banners={banners} setBanners={setBanners} />}
+        />
+        <Route
+          path="cms/banner/create"
+          element={<CreateBanner setBanners={setBanners} />}
+        />
+
+        <Route
+          path="/cms/banner/edit/:id"
+          element={<EditBanner banners={banners} setBanners={setBanners} />}
+        />
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFound />} />
