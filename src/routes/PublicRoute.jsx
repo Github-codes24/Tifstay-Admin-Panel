@@ -1,41 +1,33 @@
 import { Routes, Route, Navigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import Layout from "../Component/Layouts/Layout";
-import Owner from "../pages/module/UserManagementComp/Owner";
-import EditOwner from "../pages/module/UserManagementComp/EditOwner";
-import GuestDetails from "../pages/module/UserManagementComp/GuestDetails";
-import EditProvider from "../pages/module/UserManagementComp/EditProvider";
-import CreateOwner from "../pages/module/UserManagementComp/CreateOwner";
-import PgListing from "../pages/module/ListingManagementCom/PgListing";
-import Details from "../pages/module/ListingManagementCom/Details";
-import EditDetails from "../pages/module/ListingManagementCom/EditDetails";
-import EditTiffinDetails from "../pages/module/ListingManagementCom/EditTiffinDetails";
-import CouponsPage from "../pages/module/offers&Discount/CouponsPage";
-import OffersPage from "../pages/module/offers&Discount/OffersPage";
-import DiscountPage from "../pages/module/offers&Discount/DiscountPage";
-import NotFound from "../pages/module/offers&Discount/NotFound";
-import Booking from "../pages/module/Booking and orders/Booking";
-import BookingDetails from "../pages/module/Booking and orders/BookingDetails";
-import OverView from "../pages/module/Payment & Wallet/OverView";
+import Layout from "../components/Layouts/Layout";
+import Owner from "../pages/module/userManagement/Owner";
+import EditOwner from "../pages/module/userManagement/EditOwner";
+import GuestDetails from "../pages/module/userManagement/GuestDetails";
+import EditProvider from "../pages/module/userManagement/EditProvider";
+import CreateOwner from "../pages/module/userManagement/CreateOwner";
+import PgListing from "../pages/module/listingManagement/PgListing";
+import Details from "../pages/module/listingManagement/Details";
+import EditDetails from "../pages/module/listingManagement/EditDetails";
+import EditTiffinDetails from "../pages/module/listingManagement/EditTiffinDetails";
+import CouponsPage from "../pages/module/offers&Discount/coupons/CouponsPage";
+import OffersPage from "../pages/module/offers&Discount/offers/OfferPage";
+import DiscountPage from "../pages/module/offers&Discount/discount/DiscountPage";
+import NotFound from "../pages/module/offers&Discount/notFound";
+import Booking from "../pages/module/booking&Orders/Booking";
+import BookingDetails from "../pages/module/booking&Orders/BookingDetails";
+import OverView from "../pages/module/payment&Wallet/OverView";
 import Login from "../pages/auth/Login";
 import VerifyOTP from "../pages/auth/VerifyOTP";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
 import PasswordResetSuccessfully from "../pages/auth/PasswordResetSuccefully";
-import Dashboard from "../pages/module/Dashboard/Dashboard";
-import Alerts from "../pages/module/Dashboard/Alerts";
-import Reviews from "../pages/module/Reviews";
+import Dashboard from "../pages/module/dashBoard/Dashboard";
+import Alerts from "../pages/module/dashBoard/Alerts";
+import Reviews from "../pages/module/reviews";
 import Security from "../pages/module/securityLog";
 import ChatList from "../pages/module/ChatList/chatList";
 import ChatDetails from "../pages/module/ChatList/chatListDetails";
-import Banner from "../pages/module/cms/Banner/banners";
-import CreateBanner from "../pages/module/cms/Banner/CreateBanner";
-import EditBanner from "../pages/module/cms/Banner/EditBanner";
-import StaticPage from "../pages/module/cms/StaticPage/StaticPage";
-import CreateStaticPage from "../pages/module/cms/StaticPage/CreateStaticPage";
-import ViewStaticPage from "../pages/module/cms/StaticPage/ViewStaticPage";
-import EditStaticPage from "../pages/module/cms/StaticPage/EditStaticPage";
-import NotificationManagement from "../pages/module/cms/notifiactionManagment/NotificationManagement";
 
 function PublicRoute() {
   const initialPages = [
@@ -697,44 +689,6 @@ function PublicRoute() {
         <Route path="chats" element={<ChatList />} />
         <Route path="chats/:chatId" element={<ChatDetails />} />
         <Route path="security" element={<Security />} />
-
-        {/* Banner part */}
-        <Route
-          path="cms/banners"
-          element={<Banner banners={banners} setBanners={setBanners} />}
-        />
-        <Route
-          path="cms/banner/create"
-          element={<CreateBanner setBanners={setBanners} />}
-        />
-
-        <Route
-          path="/cms/banner/edit/:id"
-          element={<EditBanner banners={banners} setBanners={setBanners} />}
-        />
-
-        {/* Static Page */}
-        <Route
-          path="/cms/staticpage"
-          element={<StaticPage pages={pages} setPages={setPages} />}
-        />
-        <Route
-          path="/cms/static-page/create"
-          element={<CreateStaticPage setPages={setPages} />}
-        />
-        <Route
-          path="/cms/static-page/view/:id"
-          element={<ViewStaticPage pages={pages} />}
-        />
-        <Route
-          path="/cms/static-page/edit/:id"
-          element={<EditStaticPage pages={pages} setPages={setPages} />}
-        />
-         
-          <Route
-          path="cms/notification"
-          element={<NotificationManagement/>}
-        />
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFound />} />

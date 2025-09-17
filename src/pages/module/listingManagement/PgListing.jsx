@@ -1,4 +1,4 @@
-import Sidebar from "../../../Component/Layouts/Sidebar";
+import Sidebar from "../../../components/Layouts/Sidebar";
 import { IoIosSearch } from "react-icons/io";
 import { useMemo, useState } from "react";
 import { PiFunnel } from "react-icons/pi";

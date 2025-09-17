@@ -2,12 +2,12 @@ import { useState, useMemo } from 'react';
 import { SlidersHorizontal, Search, Eye, Edit, Trash2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PiFunnel } from 'react-icons/pi';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
-import { Button } from '../../../Component/ui/button';
-import { Input } from '../../../Component/ui/input';
-import { useToast } from '../../../hooks/use-toast';
-import { CouponForm } from '../../../Component/CouponForm';
-import { CouponDetails } from '../../../Component/CouponDetails';
-import { DeleteConfirmDialog } from '../../../Component/DeleteConfirmDialog';
+import { Button } from '../../../../components/ui/button';
+import { Input } from '../../../../components/ui/input';
+import { useToast } from '../../../../hooks/use-toast';
+import { CouponForm } from './CouponForm';
+import { CouponDetails } from './CouponDetails';
+import { DeleteConfirmDialog } from '../../../../components/DeleteConfirmDialog';
 
 
 export default function CouponsPage() {
@@ -35,8 +35,8 @@ export default function CouponsPage() {
   });
   
   const [filters, setFilters] = useState({
-    offerOn: ['PG/Hostel Booking'],
-    status: ['Upcoming']
+    offerOn: [],
+    status: []
   });
 
   const [coupons, setCoupons] = useState([
@@ -125,7 +125,7 @@ export default function CouponsPage() {
       );
     }
 
-    // Apply offer filters
+    // Apply offer filters only if any are selected
     if (filters.offerOn.length > 0) {
       filtered = filtered.filter(coupon => {
         if (filters.offerOn.includes('PG/Hostel Booking') && coupon.offerOn === 'PG/Hostel') {
@@ -138,7 +138,7 @@ export default function CouponsPage() {
       });
     }
 
-    // Apply status filters
+    // Apply status filters only if any are selected
     if (filters.status.length > 0) {
       filtered = filtered.filter(coupon => {
         return filters.status.some(status => 
@@ -191,7 +191,7 @@ export default function CouponsPage() {
     setView('list');
     toast({
       title: 'Offer Created!',
-      description: 'New offer has been created.',
+      description: 'New coupon has been created.',
     });
   };
 
@@ -364,13 +364,13 @@ export default function CouponsPage() {
                     </div>
                 <div className="space-y-6">
                   <div className="space-y-3">
-                    <CheckboxItem label="PG/Hostel Booking" checked={filters.offerOn.includes('PG/Hostel Booking')} onChange={(next)=>handleFilterChange('offerOn','PG/Hostel Booking', next)} highlight />
+                    <CheckboxItem label="PG/Hostel Booking" checked={filters.offerOn.includes('PG/Hostel Booking')} onChange={(next)=>handleFilterChange('offerOn','PG/Hostel Booking', next)} />
                     <CheckboxItem label="Tiffin/Restaurant Order" checked={filters.offerOn.includes('Tiffin/Restaurant Order')} onChange={(next)=>handleFilterChange('offerOn','Tiffin/Restaurant Order', next)} />
                         </div>
                   <div className="pt-2">
                     <h4 className="text-[22px] font-semibold text-[#07021C] mb-3">Status</h4>
                     <div className="space-y-3">
-                      <CheckboxItem label="Upcoming" checked={filters.status.includes('Upcoming')} onChange={(next)=>handleFilterChange('status','Upcoming', next)} highlight />
+                      <CheckboxItem label="Upcoming" checked={filters.status.includes('Upcoming')} onChange={(next)=>handleFilterChange('status','Upcoming', next)} />
                       <CheckboxItem label="Ongoing" checked={filters.status.includes('Ongoing')} onChange={(next)=>handleFilterChange('status','Ongoing', next)} />
                       <CheckboxItem label="Expired" checked={filters.status.includes('Expired')} onChange={(next)=>handleFilterChange('status','Expired', next)} />
                       </div>
@@ -457,76 +457,7 @@ export default function CouponsPage() {
             </table>
           </div>
 
-          {/* Mobile Card View */}
-          <div className="sm:hidden">
-            <div className="divide-y divide-gray-200">
-              {paginatedCoupons.map((coupon, index) => (
-                <div key={coupon.id} className="p-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-500">#{(currentPage - 1) * itemsPerPage + index + 1}</span>
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full capitalize ${getStatusColor(coupon.status)}`}>
-                        {coupon.status}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <button
-                        onClick={() => handleViewCoupon(coupon)}
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-full"
-                        title="View"
-                      >
-                        <Eye className="h-4 w-4" />
-                      </button>
-                      <button
-                        onClick={() => handleEditClick(coupon)}
-                        className="p-2 text-orange-600 hover:bg-orange-50 rounded-full"
-                        title="Edit"
-                      >
-                        <Edit className="h-4 w-4" />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteCoupon(coupon.id)}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-full"
-                        title="Delete"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-sm font-medium text-gray-900">{coupon.couponCode}</span>
-                      <span className="text-sm font-semibold text-gray-900">
-                        {coupon.discountType === 'percentage' 
-                          ? `${coupon.discount}%` 
-                          : `₹${coupon.discount}`
-                        }
-                      </span>
-                    </div>
-                    
-                    <div className="text-sm text-gray-600">
-                      <div className="flex justify-between">
-                        <span>Offer:</span>
-                        <span>{coupon.offerOn}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="text-xs text-gray-500 space-y-1">
-                      <div className="flex justify-between">
-                        <span>Start:</span>
-                        <span>{formatDate(coupon.startDate)}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Expire:</span>
-                        <span>{formatDate(coupon.expireDate)}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+         
 
           {/* Pagination */}
           <div className="flex justify-between items-center text-sm text-gray-600 rounded-[8px] px-4 py-2 bg-[#F5F5F5]">

@@ -1,4 +1,4 @@
-import Sidebar from "../../../Component/Layouts/Sidebar";
+import Sidebar from "../../../../components/Layouts/Sidebar";
 import { IoIosSearch } from "react-icons/io";
 import { useMemo, useState } from "react";
 import { PiFunnel } from "react-icons/pi";
@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import logo from "../../../assets/image.png";
 import { FaRegEdit } from "react-icons/fa";
 
-import paymentConfig from "./PaymentConfig";
+import paymentConfig from "../PaymentConfig";
 
 function OverView({ users, setUsers }) {
     const { payment } = useParams();

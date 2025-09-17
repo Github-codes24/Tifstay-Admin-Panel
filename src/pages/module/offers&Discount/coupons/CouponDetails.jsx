@@ -26,7 +26,11 @@ export function CouponDetails({ coupon, onEdit, onBack }) {
     }));
   };
 
-
+  const handleEdit = () => {
+    if (onEdit) {
+      onEdit(formData);
+    }
+  };
 
   return (
    <div className="flex flex-col gap-6 font-inter">
@@ -224,23 +228,20 @@ export function CouponDetails({ coupon, onEdit, onBack }) {
                 </div>
               </div>
             </div>
-          
-          
-
-          {/* Edit Button */}
+          </div>
+      </div>
+    
+     {/* Edit Button */}
           <div className="flex justify-center mt-6 sm:mt-8">
             <button 
-              onClick={onEdit}
+              onClick={handleEdit}
               className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors text-sm sm:text-base"
             >
               Edit
             </button>
           </div>
-        </div>
-      </div>
     </div>
     </div>
-    
     
   );
 }

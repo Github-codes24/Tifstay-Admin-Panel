@@ -2,24 +2,24 @@ import { useMemo, useState } from 'react';
 import { Search, Eye, Edit, Trash2, X } from 'lucide-react';
 import { PiFunnel } from 'react-icons/pi';
 import { IoArrowBackCircleOutline } from 'react-icons/io5';
-import { useToast } from '../../../hooks/use-toast';
-import { DeleteConfirmDialog } from '../../../Component/DeleteConfirmDialog';
-import { DiscountForm } from '../../../Component/DiscountForm';
-import { DiscountDetails } from '../../../Component/DiscountDetails';
+import { DeleteConfirmDialog } from '../../../../components/DeleteConfirmDialog';
+import { OfferForm } from './OfferForm';
+import { OfferDetails } from './OfferDetails';
+import { useToast } from '../../../../hooks/use-toast';
 
-export default function DiscountPage() {
+export default function OffersPage() {
   const { toast } = useToast();
   const [view, setView] = useState('list');
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedOffer, setSelectedOffer] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
-  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
   const [deleteDialog, setDeleteDialog] = useState({ open: false });
 
-  const [filters, setFilters] = useState({ 
-    offerOn: ['PG/Hostel Booking'], 
-    status: ['Upcoming'] 
+  const [filters, setFilters] = useState({
+    offerOn: [],
+    status: []
   });
 
   const CheckboxItem = ({ label, checked, onChange, highlight }) => (
@@ -45,62 +45,71 @@ export default function DiscountPage() {
     </button>
   );
 
-  const [discounts, setDiscounts] = useState([
-    { 
-      id: 'd1', 
-      offerOn: 'PG/Hostel', 
-      discount: 10, 
-      discountType: 'percentage', 
-      startDate: '2025-09-20', 
-      expireDate: '2025-10-20', 
-      status: 'upcoming', 
-      description: '10% off on PG/Hostel booking', 
-      termsAndConditions: '• Valid once per user' 
+  const [offers, setOffers] = useState([
+    {
+      id: 'o1',
+      title: 'Flat 10% Off on PG/Hostel',
+      offerOn: 'PG/Hostel',
+      discount: 10,
+      discountType: 'percentage',
+      startDate: '2025-09-20',
+      expireDate: '2025-10-20',
+      status: 'upcoming',
+      description: 'Enjoy 10% off on your next PG/Hostel booking.',
+      termsAndConditions: '• Valid on participating hostels only',
+      selectedPGHostels: [],
+      showInApp: 'providers'
     },
-    { 
-      id: 'd2', 
-      offerOn: 'Tiffin/Restaurant', 
-      discount: 100, 
-      discountType: 'amount', 
-      startDate: '2025-08-10', 
-      expireDate: '2025-08-25', 
-      status: 'ongoing', 
-      description: '₹100 off on orders above ₹500', 
-      termsAndConditions: '• Min order ₹500' 
-    },
+    {
+      id: 'o2',
+      title: '₹100 Cashback on Tiffin',
+      offerOn: 'Tiffin/Restaurant',
+      discount: 100,
+      discountType: 'amount',
+      startDate: '2025-08-10',
+      expireDate: '2025-08-25',
+      status: 'ongoing',
+      description: 'Get ₹100 back on tiffin orders above ₹500.',
+      termsAndConditions: '• Minimum order ₹500',
+      selectedPGHostels: [],
+      showInApp: 'users'
+    }
   ]);
 
   const activeFilters = [...filters.offerOn, ...filters.status];
 
-  const filtered = useMemo(() => {
-    let data = discounts;
+  const filteredOffers = useMemo(() => {
+    let data = offers;
     
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      data = data.filter(d => 
-        d.offerOn.toLowerCase().includes(q) || 
-        `${d.discount}`.includes(q)
+      data = data.filter(o => 
+        o.title.toLowerCase().includes(q) || 
+        o.offerOn.toLowerCase().includes(q)
       );
     }
     
+    // Apply offer filters only if any are selected
     if (filters.offerOn.length > 0) {
-      data = data.filter(d => 
-        (filters.offerOn.includes('PG/Hostel Booking') && d.offerOn === 'PG/Hostel') || 
-        (filters.offerOn.includes('Tiffin/Restaurant Order') && d.offerOn === 'Tiffin/Restaurant')
-      );
+      data = data.filter(o => {
+        if (filters.offerOn.includes('PG/Hostel Booking') && o.offerOn === 'PG/Hostel') return true;
+        if (filters.offerOn.includes('Tiffin/Restaurant Order') && o.offerOn === 'Tiffin/Restaurant') return true;
+        return false;
+      });
     }
     
+    // Apply status filters only if any are selected
     if (filters.status.length > 0) {
-      data = data.filter(d => 
-        filters.status.some(s => d.status === s.toLowerCase())
+      data = data.filter(o => 
+        filters.status.some(s => o.status === s.toLowerCase())
       );
     }
     
     return data;
-  }, [discounts, searchQuery, filters]);
+  }, [offers, searchQuery, filters]);
 
-  const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
-  const pageItems = filtered.slice(
+  const totalPages = Math.ceil(filteredOffers.length / itemsPerPage) || 1;
+  const paginatedOffers = filteredOffers.slice(
     (currentPage - 1) * itemsPerPage, 
     currentPage * itemsPerPage
   );
@@ -110,7 +119,7 @@ export default function DiscountPage() {
       ...prev,
       [category]: checked 
         ? [...prev[category], value] 
-        : prev[category].filter(x => x !== value)
+        : prev[category].filter(item => item !== value)
     }));
     setCurrentPage(1);
   };
@@ -119,20 +128,34 @@ export default function DiscountPage() {
     setFilters(prev => {
       if (prev.offerOn.includes(filter)) {
         return { ...prev, offerOn: prev.offerOn.filter(f => f !== filter) };
-      } else {
-        return { ...prev, status: prev.status.filter(f => f !== filter) };
       }
+      return { ...prev, status: prev.status.filter(f => f !== filter) };
     });
     setCurrentPage(1);
   };
 
-  const handleCreateDiscount = (data) => {
-    const newDiscount = {
+  const formatDate = (date) => new Date(date).toLocaleDateString('en-GB');
+  
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'upcoming': 
+        return 'text-yellow-600 bg-yellow-50';
+      case 'ongoing': 
+        return 'text-green-600 bg-green-50';
+      case 'expired': 
+        return 'text-red-600 bg-red-50';
+      default: 
+        return 'text-gray-600 bg-gray-50';
+    }
+  };
+
+  const handleCreateOffer = (data) => {
+    const newOffer = {
       ...data,
       id: Date.now().toString(),
       status: new Date(data.startDate) > new Date() ? 'upcoming' : 'ongoing'
     };
-    setDiscounts(prev => [newDiscount, ...prev]);
+    setOffers(prev => [newOffer, ...prev]);
     setView('list');
     toast({
       title: 'Offer Created!',
@@ -140,48 +163,32 @@ export default function DiscountPage() {
     });
   };
 
-  const handleEditDiscount = (data) => {
-    if (!selectedItem) return;
-    const updatedDiscount = {
-      ...selectedItem,
-      ...data,
-      status: new Date(data.startDate) > new Date() ? 'upcoming' : 'ongoing'
-    };
-    setDiscounts(prev => prev.map(d => d.id === selectedItem.id ? updatedDiscount : d));
+  const handleUpdateOffer = (data) => {
+    if (!selectedOffer) return;
+    const updated = { ...selectedOffer, ...data };
+    setOffers(prev => prev.map(o => o.id === selectedOffer.id ? updated : o));
+    setSelectedOffer(null);
     setView('list');
-    setSelectedItem(null);
     toast({
       title: 'Offer Updated!',
       description: 'Offer details has been updated now.',
     });
   };
 
-  const handleDeleteDiscount = (discountId) => {
-    const discount = discounts.find(d => d.id === discountId);
-    setDeleteDialog({
-      open: true,
-      offerId: discountId,
-      title: discount?.offerOn || 'Discount'
-    });
+  const requestDelete = (id) => {
+    const off = offers.find(o => o.id === id);
+    setDeleteDialog({ open: true, offerId: id, title: off?.title });
   };
 
   const confirmDelete = () => {
     if (deleteDialog.offerId) {
-      setDiscounts(prev => prev.filter(d => d.id !== deleteDialog.offerId));
+      setOffers(prev => prev.filter(o => o.id !== deleteDialog.offerId));
       toast({
         title: 'Success',
-        description: 'Discount deleted successfully',
+        description: 'Offer deleted successfully',
       });
     }
     setDeleteDialog({ open: false });
-  };
-
-  const formatDate = (d) => new Date(d).toLocaleDateString('en-GB');
-  
-  const getStatusColor = (s) => {
-    if (s === 'upcoming') return 'text-yellow-600 bg-yellow-50';
-    if (s === 'ongoing') return 'text-green-600 bg-green-50';
-    return 'text-red-600 bg-red-50';
   };
 
   if (view === 'create') {
@@ -193,19 +200,19 @@ export default function DiscountPage() {
             onClick={() => setView('list')} 
           />
           <h2 className="text-[24px] font-medium leading-none">
-            Offers & Discount / Discount / Create Discount
+            Offers & Discount / Offers / Create Offer
           </h2>
         </div>
-        <DiscountForm 
+        <OfferForm 
           mode="create" 
-          onSubmit={handleCreateDiscount} 
+          onSubmit={handleCreateOffer} 
           onCancel={() => setView('list')} 
         />
       </div>
     );
   }
 
-  if (view === 'edit' && selectedItem) {
+  if (view === 'edit' && selectedOffer) {
     return (
       <div className="flex flex-col gap-6 font-inter">
         <div className="w-full h-[72px] flex items-center gap-2 bg-white rounded-lg p-4 shadow-sm">
@@ -214,80 +221,82 @@ export default function DiscountPage() {
             onClick={() => setView('list')} 
           />
           <h2 className="text-[24px] font-medium leading-none">
-            Offers & Discount / Discount / Edit Discount
+            Offers & Discount / Offers / Edit Offer
           </h2>
         </div>
-        <DiscountForm 
+        <OfferForm 
           mode="edit" 
-          discount={selectedItem} 
-          onSubmit={handleEditDiscount} 
+          offer={selectedOffer} 
+          onSubmit={handleUpdateOffer} 
           onCancel={() => { 
             setView('list'); 
-            setSelectedItem(null); 
+            setSelectedOffer(null); 
           }} 
         />
       </div>
     );
   }
 
-  if (view === 'details' && selectedItem) {
+  if (view === 'details' && selectedOffer) {
     return (
-      <DiscountDetails 
-        discount={selectedItem} 
-        onEdit={() => setView('edit')} 
+      <OfferDetails
+        offer={selectedOffer}
+        onEdit={() => setView('edit')}
         onBack={() => { 
           setView('list'); 
-          setSelectedItem(null); 
-        }} 
+          setSelectedOffer(null); 
+        }}
       />
     );
   }
 
   return (
     <div className="flex flex-col gap-6 font-inter">
+      {/* Header Bar */}
       <div className="w-full h-[72px] flex items-center justify-between gap-2 bg-white rounded-lg p-4 shadow-sm">
-        <h2 className="text-[24px] font-medium leading-none">Offers & Discount / Discount</h2>
+        <h2 className="text-[24px] font-medium leading-none">Offers & Discount / Offers</h2>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 w-[300px] h-[40px] border rounded-full px-4">
             <Search className="w-5 h-5 text-gray-500" />
-            <input 
-              type="text" 
-              placeholder="Search by type" 
-              value={searchQuery} 
+            <input
+              type="text"
+              placeholder="Search by title or type"
+              value={searchQuery}
               onChange={(e) => { 
                 setSearchQuery(e.target.value); 
                 setCurrentPage(1); 
-              }} 
-              className="flex-1 outline-none text-[16px] font-medium placeholder-gray-400" 
+              }}
+              className="flex-1 outline-none text-[16px] font-medium placeholder-gray-400"
             />
           </div>
-          <button 
-            className="w-[200px] h-[40px] bg-[#FF6B00] flex items-center justify-center rounded-[8px] text-white cursor-pointer hover:bg-orange-600 transition" 
+          <button
+            className="w-[200px] h-[40px] bg-[#FF6B00] flex items-center justify-center rounded-[8px] text-white cursor-pointer hover:bg-orange-600 transition"
             onClick={() => setView('create')}
           >
-            Create Discount
+            Create Offer
           </button>
         </div>
       </div>
 
+      {/* Main Container with Filters */}
       <div className="bg-white rounded-[8px] shadow border border-[#D9D9D9]">
-        {/* Top bar inside the table container with filter + chips */}
         <div className="px-4 py-3 border-b border-[#E6E8ED] flex items-center gap-3">
           <div className="relative">
             <button 
-              onClick={() => setShowFilterModal(!showFilterModal)} 
+              onClick={() => setShowFilter(!showFilter)} 
               title="Offer Filter" 
               className="w-10 h-10 flex items-center justify-center rounded-[10px] bg-[#F8F5FF] text-[#004AAD] border border-[#E0E3EB]"
             >
               <PiFunnel className="w-5 h-5" />
             </button>
-            {showFilterModal && (
+            
+            {showFilter && (
               <div className="absolute top-12 left-0 w-[300px] bg-white border rounded-md shadow-lg p-3 z-10">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-[22px] font-semibold text-[#0E3B2E]">Offer On</h3>
                   <button 
-                    onClick={() => setShowFilterModal(false)} 
-                    className="text-gray-500"
+                    className="text-gray-500" 
+                    onClick={() => setShowFilter(false)}
                   >
                     ✕
                   </button>
@@ -298,7 +307,6 @@ export default function DiscountPage() {
                       label="PG/Hostel Booking" 
                       checked={filters.offerOn.includes('PG/Hostel Booking')} 
                       onChange={(next) => handleFilterChange('offerOn', 'PG/Hostel Booking', next)} 
-                      highlight 
                     />
                     <CheckboxItem 
                       label="Tiffin/Restaurant Order" 
@@ -313,7 +321,6 @@ export default function DiscountPage() {
                         label="Upcoming" 
                         checked={filters.status.includes('Upcoming')} 
                         onChange={(next) => handleFilterChange('status', 'Upcoming', next)} 
-                        highlight 
                       />
                       <CheckboxItem 
                         label="Ongoing" 
@@ -331,6 +338,7 @@ export default function DiscountPage() {
               </div>
             )}
           </div>
+          
           {activeFilters.length > 0 && (
             <div className="flex gap-2 flex-wrap">
               {activeFilters.map((filter) => (
@@ -351,6 +359,7 @@ export default function DiscountPage() {
             <thead>
               <tr className="bg-gray-100">
                 <th className="w-[80px] p-4 text-left">Sr.No.</th>
+                <th className="px-4 py-2 text-left">Title</th>
                 <th className="px-4 py-2 text-left">Offer On</th>
                 <th className="px-4 py-2 text-left">Discount</th>
                 <th className="px-4 py-2 text-left">Start Date</th>
@@ -360,20 +369,29 @@ export default function DiscountPage() {
               </tr>
             </thead>
             <tbody>
-              {pageItems.map((item, index) => (
-                <tr key={item.id} className="bg-white shadow-sm rounded-lg">
+              {paginatedOffers.map((offer, index) => (
+                <tr key={offer.id} className="bg-white shadow-sm rounded-lg">
                   <td className="px-4 py-3 align-middle text-left">
                     {(currentPage - 1) * itemsPerPage + index + 1}
                   </td>
-                  <td className="px-4 py-3 align-middle text-left">{item.offerOn}</td>
-                  <td className="px-4 py-3 align-middle text-left">
-                    {item.discountType === 'percentage' ? `${item.discount}%` : `₹${item.discount}`}
+                  <td className="px-4 py-3 align-middle text-left font-medium">
+                    {offer.title}
                   </td>
-                  <td className="px-4 py-3 align-middle text-left">{formatDate(item.startDate)}</td>
-                  <td className="px-4 py-3 align-middle text-left">{formatDate(item.expireDate)}</td>
                   <td className="px-4 py-3 align-middle text-left">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full capitalize ${getStatusColor(item.status)}`}>
-                      {item.status}
+                    {offer.offerOn}
+                  </td>
+                  <td className="px-4 py-3 align-middle text-left">
+                    {offer.discountType === 'percentage' ? `${offer.discount}%` : `₹${offer.discount}`}
+                  </td>
+                  <td className="px-4 py-3 align-middle text-left">
+                    {formatDate(offer.startDate)}
+                  </td>
+                  <td className="px-4 py-3 align-middle text-left">
+                    {formatDate(offer.expireDate)}
+                  </td>
+                  <td className="px-4 py-3 align-middle text-left">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full capitalize ${getStatusColor(offer.status)}`}>
+                      {offer.status}
                     </span>
                   </td>
                   <td className="px-4 py-3 align-middle text-left">
@@ -382,7 +400,7 @@ export default function DiscountPage() {
                         className="text-orange-500 hover:text-orange-600" 
                         title="View" 
                         onClick={() => { 
-                          setSelectedItem(item); 
+                          setSelectedOffer(offer); 
                           setView('details'); 
                         }}
                       >
@@ -392,7 +410,7 @@ export default function DiscountPage() {
                         className="text-orange-500 hover:text-orange-600" 
                         title="Edit" 
                         onClick={() => { 
-                          setSelectedItem(item); 
+                          setSelectedOffer(offer); 
                           setView('edit'); 
                         }}
                       >
@@ -401,7 +419,7 @@ export default function DiscountPage() {
                       <button 
                         className="text-orange-500 hover:text-orange-600" 
                         title="Delete" 
-                        onClick={() => handleDeleteDiscount(item.id)}
+                        onClick={() => requestDelete(offer.id)}
                       >
                         <Trash2 className="w-5 h-5" />
                       </button>
@@ -413,66 +431,10 @@ export default function DiscountPage() {
           </table>
         </div>
 
-        {/* Mobile Card View */}
-        <div className="md:hidden divide-y">
-          {pageItems.map((item, index) => (
-            <div key={item.id} className="p-4 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">
-                  #{(currentPage - 1) * itemsPerPage + index + 1}
-                </span>
-                <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full capitalize ${getStatusColor(item.status)}`}>
-                  {item.status}
-                </span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="font-medium">{item.offerOn}</span>
-                <span>
-                  {item.discountType === 'percentage' ? `${item.discount}%` : `₹${item.discount}`}
-                </span>
-              </div>
-              <div className="text-xs text-gray-500 flex justify-between">
-                <span>Start:</span>
-                <span>{formatDate(item.startDate)}</span>
-              </div>
-              <div className="text-xs text-gray-500 flex justify-between">
-                <span>Expire:</span>
-                <span>{formatDate(item.expireDate)}</span>
-              </div>
-              <div className="flex gap-3 pt-2">
-                <button 
-                  className="text-orange-500" 
-                  onClick={() => { 
-                    setSelectedItem(item); 
-                    setView('details'); 
-                  }}
-                >
-                  <Eye className="w-4 h-4" />
-                </button>
-                <button 
-                  className="text-orange-500" 
-                  onClick={() => { 
-                    setSelectedItem(item); 
-                    setView('edit'); 
-                  }}
-                >
-                  <Edit className="w-4 h-4" />
-                </button>
-                <button 
-                  className="text-orange-500" 
-                  onClick={() => handleDeleteDiscount(item.id)}
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Pagination */}
         <div className="flex justify-between items-center text-sm text-gray-600 rounded-[8px] px-4 py-2 bg-[#F5F5F5]">
           <p>
-            Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, filtered.length)} of {filtered.length} Entries
+            Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, filteredOffers.length)} of {filteredOffers.length} Entries
           </p>
           <div className="flex gap-2 items-center">
             <button 
@@ -504,7 +466,8 @@ export default function DiscountPage() {
             </button>
           </div>
         </div>
-      </div>
+
+       
 
       <DeleteConfirmDialog 
         open={deleteDialog.open} 
@@ -512,6 +475,7 @@ export default function DiscountPage() {
         onConfirm={confirmDelete} 
         couponCode={deleteDialog.title} 
       />
+    </div>
     </div>
   );
 }

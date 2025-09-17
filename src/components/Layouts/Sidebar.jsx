@@ -168,8 +168,10 @@ const menuItems = [
     icon: <FaUsers className="w-6 h-6" />,
     type: "dropdown",
     children: [
-      { label: "Profile", path: "/settings/profile", icon: <FaUser className="w-5 h-5" /> },
-      { label: "Preferences", path: "/settings/preferences", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Commission", path: "/settings/Commission", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Cashback", path: "/settings/Cashback", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Tax & Gst", path: "/settings/Tax & Gst", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Set Penalty", path: "/settings/Set Penalty", icon: <FaUser className="w-5 h-5" /> },
     ],
   },
 ];

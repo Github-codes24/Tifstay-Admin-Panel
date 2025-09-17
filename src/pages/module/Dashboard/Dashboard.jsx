@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { pgListings } from "./Data.jsx";
-import DonutChart from "./DonutChart";
+import DonutChart from "./DonutChart.jsx";
 import { FiEye } from "react-icons/fi";
 import { IoEllipseSharp } from "react-icons/io5";
 import { TbCalendarTime, TbMessageQuestion } from "react-icons/tb";
 import { FaRegClock ,FaRegStar } from "react-icons/fa";
-import PgListing from "../ListingManagementCom/PgListing.jsx";
+import PgListing from "../listingManagement/PgListing.jsx";
 import { PiFunnel } from "react-icons/pi";
 import { IoMdClose } from "react-icons/io";
 

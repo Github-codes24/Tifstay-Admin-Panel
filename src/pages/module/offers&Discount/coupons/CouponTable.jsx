@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Eye, Edit, Trash2, Filter } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
-import { Badge } from './ui/badge';
-import { Checkbox } from './ui/checkbox';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Button } from '../../../../components/ui/button';
+import { Card } from '../../../../components/ui/card';
+import { Badge } from '../../../../components/ui/badge';
+import { Checkbox } from '../../../../components/ui/checkbox';
+import { Popover, PopoverContent, PopoverTrigger } from '../../../../components/ui/popover';
 
 export function CouponTable({ coupons, onView, onEdit, onDelete, filters, onFiltersChange }) {
   const [selectedCoupons, setSelectedCoupons] = useState([]);

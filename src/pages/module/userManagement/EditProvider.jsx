@@ -1,16 +1,16 @@
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Navigate, NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import logo from "../../../assets/image.png"
-import roleConfig from "./roleConfig";
+import logo from "../../../assets/image.png";
+import roleConfig from "./RoleConfig";
 
-function EditOwner({ users, setUsers }) {
+function EditProvider({ users, setUsers }) {
   const navigate = useNavigate();
   const location = useLocation();
 const { id } = useParams();
 const [isEditable ,setIsEditable] = useState(false);
  const [showPopup, setShowPopup] = useState(false);
-  const { role } = useParams(); 
+ const { role } = useParams(); 
    const cfg = roleConfig[role] ?? roleConfig.guests;
 
 
@@ -27,6 +27,7 @@ const [isEditable ,setIsEditable] = useState(false);
       );
     }
 
+    <div>Kartik</div>
 
 const [profile, setProfile] = useState(user.profile);
 const [name, setName] = useState(user.name);
@@ -75,7 +76,6 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
       prevUser.map((u)=>(u.id ===user.id ?updateUser:u))
     );
     setIsEditable(false);
-    navigate(-1);
   };
 
   const handleConfirm =()=>{
@@ -96,7 +96,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
           onClick={() => navigate(-1)}
         />
         <h2 className="text-[24px] font-medium leading-none">
-          {cfg.editTitle}
+          {cfg.detailsTitle}
         </h2>
       </div>
 
@@ -122,7 +122,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                 <input
                   type="text"
                   value={name}
-               
+                  disabled={!isEditable}
                   onChange={(e)=>setName(e.target.value)}
                  placeholder="Mahesh Pawar"
                   className="bg-white border border-gray-300 rounded-[8px] px-4 py-3 outline-none"
@@ -137,7 +137,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                 <input
                   type="text"
                   value={profile}
-             
+                  disabled={!isEditable}
                   onChange={(e)=>setProfile(e.target.value)}
                   placeholder="PG/Hostel Owner"
                   className="bg-white border border-gray-300 rounded-[8px] px-4 py-3 outline-none"
@@ -154,7 +154,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                 <input
                   type="text"
                   value={phone}
-            
+                  disabled={!isEditable}
                   onChange={(e)=>{
                     const value = e.target.value;
                     if(/^\d*$/.test(value)){
@@ -173,7 +173,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                 <input
                   type="email"
                   value={email}
-          
+                  disabled={!isEditable}
                   onChange={(e)=>setEmail(e.target.value)}
                   placeholder="example@mail.com"
                   className="bg-white border border-gray-300 rounded-[8px] px-4 py-3 outline-none"
@@ -191,7 +191,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                 <input
                   type="text"
                   value={password}
-                 
+                  disabled={!isEditable}
                   onChange={(e)=>setPassword(e.target.value)}
                   placeholder="SDBH@2025"
                   className="bg-white border border-gray-300 rounded-[8px] px-4 py-3 outline-none"
@@ -206,7 +206,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                 <input
                   type="text"
                   value={address}
-           
+                  disabled={!isEditable}
                   onChange={(e)=>setAddress(e.target.value)}
                   placeholder="4517 Washington Ave. Manchester, Kentucky 39495"
                   className="bg-white border border-gray-300 rounded-[8px] px-4 py-3 outline-none"
@@ -233,7 +233,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                   placeholder="98765432101"
                   maxLength={18}
                   value={accountNumber}
-            
+                  disabled={!isEditable}
                   onChange={(e)=>{
                     const value = e.target.value;
                     if (/^\d*$/.test(value)) {
@@ -254,7 +254,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                 <input
                   type="text"
                   value={ifscCode}
-               
+                  disabled={!isEditable}
                   onChange={(e)=>setIfscCode(e.target.value)}
                   placeholder="SBIN0001234"
                   className="bg-white border border-gray-300 rounded-[8px] px-4 py-3 outline-none"
@@ -272,7 +272,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                 <input
                   type="text"
                   value={accountType}
-            
+                  disabled={!isEditable}
                   onChange={(e)=>setAccountType(e.target.value)}
                   placeholder="Current"
                   className="bg-white border border-gray-300 rounded-[8px] px-4 py-3 outline-none"
@@ -286,7 +286,7 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
                 <input
                   type="text"
                   value={accountHolderName}
-            
+                  disabled={!isEditable}
                   onChange={(e)=>setAccountHolderName(e.target.value)}
                   placeholder="Mahesh Pawar"
                   className="bg-white border border-gray-300 rounded-[8px] px-4 py-3 outline-none"
@@ -295,12 +295,53 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
             </div>
           </div>
         </div>
-        <div className="flex gap-4">      
-            <button onClick={handleSave} className="w-[200px] h-[40px] bg-[#004AAD] rounded-[8px] text-white">
-          Update
+        <div className="flex gap-4">
+
+            <button onClick={()=>setShowPopup(true)} className={`w-[200px] h-[40px] border border-[#004AAD] rounded-[8px] text-[#004AAD] ${isEditable ===true ? "hidden" :""}`}>
+          {user.status === "Active"?"Block":"Unblock"}
         </button>
 
-     
+        {showPopup && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40">
+            <div className="bg-white rounded-lg shadow-lg p-6 w-[450px]  flex flex-col gap-4  items-center">
+              <img src={logo} alt="" className="w-[246px] h-[56px] "/>
+              <h2 className="text-lg font-semibold">{user.status=="Active" ? "Block User" : "Unblock User"}</h2>
+              <p className="text-[#666060] text-[16px] font-inter font-regular font-semibold text-center ">
+                  {user.status === "Active"
+                              ? "Are you sure you want to block this user?"
+                              : "Are you sure you want to unblock this user?"}
+              </p>
+
+                 <div className="flex justify-end gap-4">
+              <button
+                onClick={() => setShowPopup(false)}
+                className="w-[200px] h-[40px] rounded-[8px] border border-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="w-[200px] h-[40px] rounded-[8px] bg-[#004AAD] text-white"
+              >
+                {user.status === "Active" ? "Block" : "Unblock"}
+              </button>
+            </div>
+                          
+            </div>
+
+          </div>
+        )}
+            <NavLink
+            to={`/${role}/edit/${user.id}`}
+            >
+               <button  className="w-[200px] h-[40px] bg-[#004AAD] rounded-[8px] text-white">
+          Edit
+        </button>
+
+              
+            </NavLink>
+           
+       
         </div>
         
       </div>
@@ -308,4 +349,4 @@ const [accountHolderName, setAccountHolderName] = useState(user.accountHolderNam
   );
 }
 
-export default EditOwner;
+export default EditProvider;
