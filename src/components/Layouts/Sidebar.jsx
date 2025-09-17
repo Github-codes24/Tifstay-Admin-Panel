@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useState } from "react";
 import { MdDashboard } from "react-icons/md";
 import { FaUsers, FaUser } from "react-icons/fa";
@@ -91,7 +90,7 @@ const menuItems = [
       },
       {
         label: "Wallet Transactions",
-        path: "/payments/transactions",
+        path: "/payments/wallet-transactions",
         icon: <IoMdRestaurant className="w-5 h-5" />,
       },
       {
@@ -146,8 +145,10 @@ const menuItems = [
     icon: <FaUsers className="w-6 h-6" />,
     type: "dropdown",
     children: [
-      { label: "Pages", path: "/cms/pages", icon: <FaUser className="w-5 h-5" /> },
-      { label: "Banners", path: "/cms/banners", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Banner", path: "/cms/banners", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Static Pages", path: "/cms/staticpage", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Notification Management", path: "/cms/notification", icon: <FaUser className="w-5 h-5" /> },
+      
     ],
   },
   {
@@ -167,8 +168,10 @@ const menuItems = [
     icon: <FaUsers className="w-6 h-6" />,
     type: "dropdown",
     children: [
-      { label: "Profile", path: "/settings/profile", icon: <FaUser className="w-5 h-5" /> },
-      { label: "Preferences", path: "/settings/preferences", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Commission", path: "/settings/Commission", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Cashback", path: "/settings/Cashback", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Tax & Gst", path: "/settings/Tax & Gst", icon: <FaUser className="w-5 h-5" /> },
+      { label: "Set Penalty", path: "/settings/Set Penalty", icon: <FaUser className="w-5 h-5" /> },
     ],
   },
 ];
@@ -241,5 +244,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-=======
->>>>>>> b6169b461f0d339c0d72b092658d8d28138cd6ea
