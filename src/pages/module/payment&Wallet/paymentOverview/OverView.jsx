@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiEye } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
-import logo from "../../../assets/image.png";
+import logo from "../../../../assets/image.png";
 import { FaRegEdit } from "react-icons/fa";
 
 import paymentConfig from "../PaymentConfig";
