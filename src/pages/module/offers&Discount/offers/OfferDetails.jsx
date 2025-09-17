@@ -4,6 +4,13 @@ import { IoArrowBackCircleOutline } from 'react-icons/io5';
 export function OfferDetails({ offer, onEdit, onBack }) {
   const navigate = useNavigate();
   
+  const handleEdit = () => {
+    if (onEdit) {
+      // Pass the offer data to the onEdit callback
+      onEdit(offer);
+    }
+  };
+  
   return (
     <div className="flex flex-col gap-6 font-inter">
       {/* Header Bar */}
@@ -150,23 +157,20 @@ export function OfferDetails({ offer, onEdit, onBack }) {
                   </div>
                 </div>
               </div>
-
-              {/* Edit Button */}
+               </div>
+          </div>
+        </div>
+      </div>
+      {/* Edit Button */}
               <div className="flex justify-center pt-6">
                 <button 
-                  onClick={onEdit}
+                  onClick={handleEdit}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-3 rounded-lg font-medium text-base h-auto transition-colors"
                 >
                   Edit
                 </button>
               </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     </div>
   );
 }
-

@@ -8,7 +8,7 @@ import { FiEye } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
 import logo from "../../../assets/image.png";
 import { FaRegEdit } from "react-icons/fa";
-import roleConfig from "./roleConfig";
+import roleConfig from "./RoleConfig";
 
 function Owner({ users, setUsers }) {
 

@@ -1,4 +1,4 @@
-import CouponsPage from './CouponsPage';
+import CouponsPage from './coupons/couponsPage';
 
 const Index = () => {
   return <CouponsPage />;
