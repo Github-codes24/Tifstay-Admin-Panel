@@ -36,6 +36,9 @@ import HostelPayouts from "../pages/module/Payment & Wallet/HostelPayouts";
 import TiffinPendingPayouts from "../pages/module/Payment & Wallet/TiffinPayouts";
 import TiffinPayouts from "../pages/module/Payment & Wallet/TiffinPayouts";
 import WalletTransactions from "../pages/module/Payment & Wallet/WalletTransactions";
+import RestaurantData from "../pages/module/ListingManagementCom/ResturantData";
+import TransitionDetails from "../pages/module/Payment & Wallet/TransitionDetails";
+import PayoutHistory from "../pages/module/Payment & Wallet/PayoutHistory";
 
 function PublicRoute() {
   const initialUsers = [
@@ -298,176 +301,8 @@ function PublicRoute() {
     }
   ];
 
-  const restaurantListings = [
-    {
-      id: 1,
-      name: "Green Spoon Veg Delight",
-      phone: "9876543210",
-      address: "123, Green Valley Road, Dharampeth, Nagpur - 440010",
-      status: "Rejected",
-      foodType: "Veg",
-      description: "A clean and cozy vegetarian restaurant offering homemade-style meals. Known for its hygiene and quick service, popular among college students and families.",
-      priceDay: 300,
-      priceWeekly: 2000,
-      priceMonthly: 8000,
-      offer: 10,
-      startTime: "7:00 AM",
-      endTime: "10:00 PM",
-      orderType: "Dining, Delivery",
-      mealPreference: "Breakfast, Lunch, Dinner",
-      deliveryTiming: {
-        start: "7:00 AM",
-        end: "9:00 AM"
-      },
-      includes: [
-        "Thali with 2 Sabzis",
-        "Dal & Rice",
-        "Roti/Chapati",
-        "Pickle & Salad",
-        "Sweet Dish (once a week)"
-      ]
-    },
-    {
-      id: 2,
-      name: "City Bites Multi-Cuisine",
-      phone: "9123456789",
-      address: "45, Rosewood Lane, Ramdaspeth, Nagpur - 440012",
-      status: "Approved",
-      foodType: "Veg, Non-Veg",
-      description: "Multi-cuisine family restaurant offering Indian, Chinese, and Tandoor dishes. Dine-in and quick delivery available within city limits.",
-      priceDay: 350,
-      priceWeekly: 2400,
-      priceMonthly: 8800,
-      offer: 15,
-      startTime: "9:00 AM",
-      endTime: "11:00 PM",
-      orderType: "Dining, Delivery",
-      mealPreference: "Lunch,Dinner",
-      deliveryTiming: {
-        start: "1:00 PM",
-        end: "3:00 PM"
-      },
-      includes: [
-        "Butter Chicken / Paneer Butter Masala",
-        "Naan / Roti",
-        "Biryani",
-        "Raita",
-        "Soft Drink (optional)"
-      ]
-    },
-    {
-      id: 3,
-      name: "Healthy Bites Cafe",
-      phone: "9812345670",
-      address: "78, Lake View Society, Pratap Nagar, Nagpur - 440015",
-      status: "Pending",
-      foodType: "Veg",
-      description: "A health-focused cafe serving low-oil, low-sugar vegetarian meals with fresh ingredients. Ideal for fitness enthusiasts and health-conscious eaters.",
-      priceDay: 280,
-      priceWeekly: 1800,
-      priceMonthly: 7500,
-      offer: 5,
-      startTime: "10:00 AM",
-      endTime: "12:00 PM",
-      orderType: "Delivery Only",
-      mealPreference: "Breakfast,Lunch",
-      deliveryTiming: {
-        start: "6:30 AM",
-        end: "8:30 AM"
-      },
-      includes: [
-        "Oats Upma",
-        "Sprout Salad",
-        "Grilled Sandwich",
-        "Fruit Bowl",
-        "Detox Juice"
-      ]
-    },
-    {
-      id: 4,
-      name: "The Spice Lounge",
-      phone: "9988776655",
-      address: "201, Shankar Nagar, Hingna Road, Nagpur - 440016",
-      status: "Approved",
-      foodType: "Non-Veg",
-      description: "Premium non-veg dining with classic Indian and Mughlai dishes. Elegant ambience for dine-in and quick delivery options.",
-      priceDay: 420,
-      priceWeekly: 2700,
-      priceMonthly: 9500,
-      offer: 12,
-      startTime: "7:00 AM",
-      endTime: "10:00 PM",
-      orderType: "Dining,Delivery",
-      mealPreference: "Dinner",
-      deliveryTiming: {
-        start: "7:00 PM",
-        end: "11:00 PM"
-      },
-      includes: [
-        "Mutton Rogan Josh",
-        "Chicken Biryani",
-        "Butter Naan",
-        "Gulab Jamun",
-        "Mineral Water"
-      ]
-    },
-    {
-      id: 5,
-      name: "Budget Tiffins",
-      phone: "9090909090",
-      address: "5, Lotus Apartments, Trimurti Nagar, Nagpur - 440022",
-      status: "Rejected",
-      foodType: "Veg",
-      description: "Affordable tiffin service for students and working professionals. Home-cooked food delivered fresh daily.",
-      priceDay: 220,
-      priceWeekly: 1400,
-      priceMonthly: 6000,
-      offer: 18,
-      startTime: "9:00 AM",
-      endTime: "10:30 PM",
-      orderType: "Delivery",
-      mealPreference: "Lunch",
-      deliveryTiming: {
-        start: "12:00 PM",
-        end: "2:00 PM"
-      },
-      includes: [
-        "Rice",
-        "Chapati (4)",
-        "Dal / Curry",
-        "Dry Veg",
-        "Pickle"
-      ]
-    },
-    {
-      id: 6,
-      name: "Office Meals by Aspire",
-      phone: "9876512345",
-      address: "12, Tech Park Road, IT Hub, Nagpur - 440024",
-      status: "Approved",
-      foodType: "Veg, Non-Veg",
-      description: "Corporate lunch provider with customizable weekly plans. Ideal for office lunches with scheduled delivery.",
-      priceDay: 380,
-      priceWeekly: 2250,
-      priceMonthly: 8200,
-      offer: 10,
-      startTime: "8:00 AM",
-      endTime: "12:00 PM",
-      orderType: "Delivery",
-      mealPreference: "Lunch",
-      deliveryTiming: {
-        start: "12:30 PM",
-        end: "2:00 PM"
-      },
-      includes: [
-        "Paneer / Chicken Gravy",
-        "Rice / Pulao",
-        "Chapati",
-        "Curd",
-        "Fruit / Sweet"
-      ]
-    }
-  ];
+
+
 
   const dashboardDatas = [
     {
@@ -515,8 +350,9 @@ function PublicRoute() {
   const [users, setUsers] = useState(initialUsers);
   const [listingData, setListingData] = useState(pgListings);
   const [booking, setBooking] = useState(bookingDetails);
-  const [restaurants, setRestaurants] = useState(restaurantListings);
+  const [restaurants, setRestaurants] = useState(RestaurantData);
   const [dashboardData, setDashboardData] = useState(dashboardDatas);
+  const [showPopup, setShowPopup] = useState(false);
 
   // Component to render details based on user role
   function RenderDetailsByRole({ users, setUsers }) {
@@ -543,10 +379,10 @@ function PublicRoute() {
   function RenderDetailsByType() {
     const { listing } = useParams();
     if (listing === "pglisting") {
-      return <Details users={listingData} setUsers={setListingData} />;
+      return <Details users={listingData} setUsers={setListingData} showPopup={showPopup} setShowPopup={setShowPopup} />;
     }
     if (listing === "restaurantlisting") {
-      return <Details users={restaurants} setUsers={setRestaurants} />;
+      return <Details users={restaurants} setUsers={setRestaurants} showPopup={showPopup} setShowPopup={setShowPopup} />;
     }
     return <div>Invalid listing type.</div>;
   }
@@ -605,9 +441,11 @@ function PublicRoute() {
 
         {/* Payment & Wallet */}
         <Route path="payments/:payment" element={<OverView users={paymentData}  />} />
-         <Route path="/payment/pending-payouts" element={<HostelPayouts />} />
-         <Route path="/payment/tiffin-pending-payouts" element={<TiffinPayouts />} />
-         <Route path="/payment/transactions" element={<WalletTransactions />} />
+         <Route path="/payments/pending-payouts" element={<HostelPayouts />} />
+         <Route path="/payments/tiffin-pending-payouts" element={<TiffinPayouts />} />
+         <Route path="/payments/transactions" element={<WalletTransactions />} />
+         <Route path="/payments/transactions-details" element={<TransitionDetails />} />
+         <Route path="/payments/payout-history" element={<PayoutHistory />} />
 
 
         {/* <Route path="payments/:payment" element={<OverView users={paymentData}  />} /> */}

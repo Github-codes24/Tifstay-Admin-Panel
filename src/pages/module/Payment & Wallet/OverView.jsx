@@ -78,7 +78,9 @@ function OverView() {
     <div className="flex flex-col gap-6 font-inter">
       {/* Header Bar */}
       <div className="w-full h-[72px] flex items-center gap-16 bg-white rounded-lg p-4 shadow-sm">
-        <h2 className="text-[24px] font-medium leading-none">{cfg.listTitle}</h2>
+        <h2 className="text-[24px] font-medium leading-none">
+          {cfg.listTitle}
+        </h2>
 
         {/* Search Bar */}
         <div className="flex items-center gap-2 w-[300px] h-[40px] border rounded-full px-4">
@@ -156,10 +158,22 @@ function OverView() {
           </div>
 
           {/* Cards */}
-          <div className="w-full flex gap-[14px]">
+          
+          {/* <div className="w-full h-[166px] bg-red-600">
+
+            <div className="w-[338px] h-[166px] rounded-[16px] p-6"  style={{ background: "linear-gradient(180deg, #FFE7D6 0.86%, #F7E8DE 55.15%, #ECE9E9 76.27%)",}}>
+                <h3 className="font-medium text-[12px] text-[#0A051]"> Gross Revenue </h3>
+
+                <div className="text-[24px] font-medium flex items-center gap "><MdOutlineCurrencyRupee className="w-4 h-4"/>234,568.7</div>
+                <div className="font-medium text-[10px] text-[#34C759] flex gap-2 items-center"><FaArrowTrendUp className="w-4 h-4" /> +3.7 % <span className="font-medium text-[8px]">Today</span></div>
+            </div>
+
+          </div> */}
+
+          <div className="w-full h-[166px] flex gap-[14px] ">
             {/* Gross Revenue */}
             <div
-              className="w-[338px] h-[166px] rounded-[16px] p-6"
+              className="w-[338px] h-[166px] rounded-[16px] p-6 "
               style={{
                 background:
                   "linear-gradient(180deg, #FFE7D6 0.86%, #F7E8DE 55.15%, #ECE9E9 76.27%)",
@@ -168,7 +182,7 @@ function OverView() {
               <h3 className="font-medium text-[12px] text-[#0A051]">
                 Gross Revenue
               </h3>
-              <div>
+              <div className="flex justify-between">
                 <div className="flex items-center">
                   <MdOutlineCurrencyRupee />
                   <h2 className="font-medium text-[24px] text-[#0A051F]">
@@ -224,19 +238,19 @@ function OverView() {
                       <div className="font-medium text-[14px] text-[#0A051F] flex items-center gap-1">
                         <MdOutlineCurrencyRupee /> 234,568.7
                       </div>
-                     <div
-  className="text-[#004AAD] font-medium text-[14px] cursor-pointer"
-  onClick={() => {
-    if (title.includes("Hostel")) {
-      navigate("/payment/pending-payouts"); // ✅ navigate to pending payouts
-    }
-    if (title.includes("Tiffin")) {
-      navigate("/payment/tiffin-pending-payouts"); // optional, for tiffin/restaurant
-    }
-  }}
->
-  See Details
-</div>
+                      <div
+                        className="text-[#004AAD] font-medium text-[14px] cursor-pointer"
+                        onClick={() => {
+                          if (title.includes("Hostel")) {
+                            navigate("/payment/pending-payouts"); // ✅ navigate to pending payouts
+                          }
+                          if (title.includes("Tiffin")) {
+                            navigate("/payment/tiffin-pending-payouts"); // optional, for tiffin/restaurant
+                          }
+                        }}
+                      >
+                        See Details
+                      </div>
                     </div>
                   </div>
                 ))}

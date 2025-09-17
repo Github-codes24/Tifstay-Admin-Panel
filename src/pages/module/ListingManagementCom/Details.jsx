@@ -7,18 +7,18 @@
   import img5 from "../../../assets/img5.jpg"
   import img6 from "../../../assets/img6.jpg"
   import { SlLocationPin } from "react-icons/sl";
-  import { useState } from "react";
+  // import { useState } from "react";
   import logo from "../../../assets/image.png";
   import veg from "../../../assets/veg.png";
   import { MdOutlineWatchLater } from "react-icons/md";
   import { GiChickenOven } from "react-icons/gi";
-  function Details({users, setUsers}){
+  function Details({users, setUsers, showPopup, setShowPopup}) {
 
     const { id, listing } = useParams();
     console.log(listing);
       const navigate = useNavigate();
       // const { id } = useParams();
-      const [showPopup, setShowPopup] = useState(false);
+      // const [showPopup, setShowPopup] = useState(false);
 
       const user =users.find((u)=>u.id ===parseInt(id))
       if (!user) {
@@ -38,11 +38,9 @@
 
       const updateStatus =(newStatus)=>{
           setUsers((prevUser)=>prevUser.map((u)=>u.id ===user.id ?{...u ,status:newStatus} :u))
+          setShowPopup(true);
+    
       }
-
-      
-
-
 
       return(
 
@@ -194,28 +192,11 @@
                       
 
                 <div className="flex gap-4">
-                      <button onClick={()=>{updateStatus("Rejected"); setShowPopup(true)}} className="w-[200px] h-[40px] rounded-[8px] border border-[#004AAD] text-[#004AAD]">Reject</button>
-                      <button onClick={()=>{updateStatus("Approved"); setShowPopup(true)}} className="w-[200px] h-[40px] rounded-[8px] bg-[#004AAD] text-white">Approve</button>
+                      <button onClick={()=>{updateStatus("Rejected"); }} className="w-[200px] h-[40px] rounded-[8px] border border-[#004AAD] text-[#004AAD]">Reject</button>
+                      <button onClick={()=>{updateStatus("Approved"); }} className="w-[200px] h-[40px] rounded-[8px] bg-[#004AAD] text-white">Approve</button>
                 </div>
 
-                  {/* {showPopup && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-              <h2 className="text-xl font-semibold text-green-600">
-                ✅ Successfully Approved!
-              </h2>
-              <p className="mt-2 text-gray-600">
-                The listing has been approved successfully.
-              </p>
-              <button
-                onClick={() => setShowPopup(false)}
-                className="mt-4 px-6 py-2 bg-[#004AAD] text-white rounded-lg"
-              >
-                OK
-              </button>
-            </div>
-          </div>
-        )} */}
+                 
                 {showPopup && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40" onClick={()=>setShowPopup(false)}>
                           <div className="bg-white rounded-lg shadow-lg p-6 w-[360px]  flex flex-col gap-2  items-center">

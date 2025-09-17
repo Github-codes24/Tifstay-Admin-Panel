@@ -50,15 +50,20 @@ function HostelPayouts() {
   const totalPages = Math.ceil(payoutData.length / rowsPerPage);
 
   return (
-    <div className="p-4 font-inter">
-      {/* Breadcrumbs */}
-      <div className="text-sm text-gray-600 mb-4">
-        Payment & Wallet / Payments Overview /{" "}
+    <div className="flex h-screen flex-col gap-6 font-inter">
+
+
+       <div className="w-full h-[72px] flex items-center  gap-16 bg-white rounded-lg p-4 shadow-sm">
+        <h2 className="text-[24px] font-medium leading-none">
+          Payment & Wallet / Payments Overview /{" "}
         <span className="font-semibold">PG or Hostel Pending Payouts</span>
+
+        </h2>
       </div>
+      
 
       {/* Top Payout Amount + Filters */}
-      <div className="border rounded-md p-4 mb-6">
+       <div className="relative w-full min-h-[540px] p-4 rounded-[8px] bg-white shadow border border-[#D9D9D9] flex flex-col gap-4 font-inter">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold">
             Total Payout Amount:{" "}
@@ -79,35 +84,34 @@ function HostelPayouts() {
             </select>
           </div>
         </div>
-      </div>
 
-      {/* Table */}
-      <div className="border rounded-md overflow-hidden">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="bg-[#F9F9F9] text-[14px] font-semibold text-[#0A051F]">
-              <th className="px-4 py-3 border">Sr.No.</th>
-              <th className="px-4 py-3 border">Hostel Name</th>
-              <th className="px-4 py-3 border">This Week Payout Amount</th>
-              <th className="px-4 py-3 border">Total Payout Pending Amount</th>
-              <th className="px-4 py-3 border">Status</th>
-              <th className="px-4 py-3 border">Action</th>
-            </tr>
-          </thead>
-          <tbody>
+
+        <div className="overflow-x-auto flex-1 font-inter pb-6 min-h-[669px] ">
+                  <table className="w-full text-center border-separate border-spacing-y-2">
+                    <thead>
+                      <tr className="bg-gray-100">
+                        <th className="w-[80px] px-4 py-4 h-[70px] ">Sr.No.</th>
+                        <th className="px-4 py-4 h-[70px] ">Hostel Name</th>
+                        <th className="px-4 py-4 h-[70px] ">This Week Payout Amount</th>
+                        <th className="px-4 py-4 h-[70px] ">Total Payout Pending Amount</th>
+                        <th className="px-4 py-4 h-[70px] ">Status</th>
+                        <th className="px-4 py-4 h-[70px] ">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
             {currentRows.map((row, index) => (
               <tr
                 key={row.id}
                 className="text-[14px] text-[#333] hover:bg-[#FAFAFA]"
               >
-                <td className="px-4 py-2 border">
+                <td className="px-4 py-2 ">
                   {indexOfFirstRow + index + 1}
                 </td>
-                <td className="px-4 py-2 border">{row.hostelName}</td>
-                <td className="px-4 py-2 border">{row.weekAmount}</td>
-                <td className="px-4 py-2 border">{row.pendingAmount}</td>
+                <td className="px-4 py-4 h-[80px] ">{row.hostelName}</td>
+                <td className="px-4 py-4 h-[80px] ">{row.weekAmount}</td>
+                <td className="px-4 py-4 h-[80px] ">{row.pendingAmount}</td>
                 <td
-                  className={`px-4 py-2 border font-medium ${
+                  className={`px-4 py-4  h-[80px] font-medium ${
                     row.status === "Pending"
                       ? "text-yellow-500"
                       : "text-green-500"
@@ -115,7 +119,7 @@ function HostelPayouts() {
                 >
                   {row.status}
                 </td>
-                <td className="px-4 py-2 border text-center">
+                <td className="px-4 py-4 h-[80px]  text-center">
                   <button className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 text-sm font-medium">
                     PAY AMOUNT
                   </button>
@@ -123,8 +127,9 @@ function HostelPayouts() {
               </tr>
             ))}
           </tbody>
-        </table>
-
+                  </table>
+                
+             
         {/* Pagination */}
         <div className="flex justify-between items-center px-4 py-2 text-sm text-gray-600">
           <span>
@@ -170,8 +175,10 @@ function HostelPayouts() {
             </button>
           </div>
         </div>
+         </div>
       </div>
     </div>
+
   );
 }
 

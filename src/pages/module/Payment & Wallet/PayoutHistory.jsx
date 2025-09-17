@@ -3,9 +3,9 @@ import { useState } from "react";
 import { PiFunnel } from "react-icons/pi";
 import { IoMdClose } from "react-icons/io";
 import { FiEye } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
 
-function WalletTransactions() {
+
+function PayoutHistory() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -74,7 +74,6 @@ function WalletTransactions() {
   const indexOfFirst = indexOfLast - usersPerPage;
   const currentTxns = filteredTransactions.slice(indexOfFirst, indexOfLast);
 
-  const navigate = useNavigate();
 
   // ✅ Toggle filters
   const toggleFilter = (type) => {
@@ -206,7 +205,6 @@ function WalletTransactions() {
                 <th className="px-4 py-2">User Name</th>
                 <th className="px-4 py-2">Amount</th>
                 <th className="px-4 py-2">Date</th>
-                <th className="px-4 py-2">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -217,16 +215,6 @@ function WalletTransactions() {
                   <td className="px-4 py-3">{txn.userName}</td>
                   <td className="px-4 py-3">{txn.amount}</td>
                   <td className="px-4 py-3">{txn.date}</td>
-                  <td className="px-4 py-3">
-                    <button
-                      className="text-orange-500 hover:text-orange-600"
-                      title="View"
-                      // onClick={() => navigate(`/wallet/transactions/${txn.id}`)} /payment/transactions-details
-                        onClick={() => navigate("/payment/transactions-details")}
-                    > 
-                      <FiEye className="w-6 h-6" />
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -273,4 +261,4 @@ function WalletTransactions() {
   );
 }
 
-export default WalletTransactions;
+export default PayoutHistory;

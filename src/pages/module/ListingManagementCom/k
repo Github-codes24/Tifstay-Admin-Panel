@@ -1,0 +1,76 @@
+{/* Food Type */}
+            <div className="flex flex-col gap-2">
+              <h3 className="font-medium text-[14px] text-[#0A051F]">
+                Food Type *
+              </h3>
+              {[
+                { id: "Veg", label: "Vegetarian Only" },
+                { id: "Non-Veg", label: "Non-Vegetarian Only" },
+                { id: "Veg, Non-Veg", label: "Both Veg & Non-Veg" },
+              ].map((option) => (
+                <div key={option.id} className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    id={option.id}
+                    name="foodType"
+                    value={option.id}
+                    checked={foodType === option.id}
+                    onChange={() => setFoodType(option.id)}
+                    className="accent-[#004AAD] w-4 h-4"
+                  />
+                  <label
+                    htmlFor={option.id}
+                    className="text-[#666060] font-medium text-[14px]"
+                  >
+                    {option.label}
+                  </label>
+                </div>
+              ))}
+            </div>
+
+            {/* What's included */}
+            <div className="flex flex-col w-full gap-1">
+              <label className="text-[14px] font-medium text-[#0A051F]">
+                What's included *
+              </label>
+              <textarea
+                value={includes}
+                onChange={(e) => setIncludes(e.target.value)}
+                placeholder="One item per line (e.g., Paneer, Rice, Chapati...)"
+                className="min-h-[92px] bg-white border border-gray-300 rounded-[8px] px-4 py-3 outline-none resize-none"
+              />
+            </div>
+
+            {/* Order Type */}
+            <div className="min-h-[82px] flex flex-col gap-[14px]">
+              {orderType.map((option, index) => (
+                <label
+                  key={index}
+                  className="flex items-center gap-2 text-[14px] text-[#252525] cursor-pointer"
+                  onClick={() => toggleOrderType(index)}
+                >
+                  <input
+                    type="checkbox"
+                    checked={option.checked}
+                    onChange={() => toggleOrderType(index)}
+                    className="hidden"
+                  />
+                  <span
+                    className={`w-5 h-5 flex items-center justify-center border border-gray-400 rounded ${
+                      option.checked ? "bg-[#FF6B00] border-none" : ""
+                    }`}
+                  >
+                    {option.checked && (
+                      <img
+                        src={checkmark}
+                        alt="checked"
+                        className="w-[10px] h-[10px]"
+                      />
+                    )}
+                  </span>
+                  {option.label}
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
