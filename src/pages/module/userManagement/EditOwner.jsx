@@ -1,12 +1,8 @@
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-<<<<<<< HEAD:src/pages/module/UserManagementComp/EditOwner.jsx
-import roleConfig from "./roleConfig";
-=======
-import logo from "../../../assets/image.png"
+// import logo from "../../../assets/image.png"
 import roleConfig from "./RoleConfig";
->>>>>>> b6169b461f0d339c0d72b092658d8d28138cd6ea:src/pages/module/userManagement/EditOwner.jsx
 
 function EditOwner({ users, setUsers }) {
   const navigate = useNavigate();

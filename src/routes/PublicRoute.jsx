@@ -26,75 +26,14 @@ import Dashboard from "../pages/module/dashBoard/Dashboard";
 import Alerts from "../pages/module/dashBoard/Alerts";
 import Reviews from "../pages/module/ratings&Review/Reviews";
 import Security from "../pages/module/security&Logs/Security&Log";
-import ChatList from "../pages/module/ChatList/chatList";
-import ChatDetails from "../pages/module/ChatList/chatListDetails";
-<<<<<<< HEAD
-import { pgHostelData, tiffinData, userData } from '../pages/module/Dashboard/overviewData';
-import OverviewPage from "../pages/module/Dashboard/OverviewPage";
-
-import paymentData from "../pages/module/Payment & Wallet/paymentData";
-import HostelPayouts from "../pages/module/Payment & Wallet/HostelPayouts";
-import TiffinPendingPayouts from "../pages/module/Payment & Wallet/TiffinPayouts";
-import TiffinPayouts from "../pages/module/Payment & Wallet/TiffinPayouts";
-import WalletTransactions from "../pages/module/Payment & Wallet/WalletTransactions";
-import RestaurantData from "../pages/module/ListingManagementCom/ResturantData";
-import TransitionDetails from "../pages/module/Payment & Wallet/TransitionDetails";
-import PayoutHistory from "../pages/module/Payment & Wallet/PayoutHistory";
-=======
-import Banner from "../pages/module/cms/Banner/banners";
-import StaticPage from "../pages/module/cms/StaticPage/StaticPage";
-import EditStaticPage from "../pages/module/cms/StaticPage/EditStaticPage";
-import NotificationManagement from "../pages/module/cms/notifiactionManagment/NotificationManagement";
-import EditBanner from "../pages/module/cms/Banner/EditBanner";
-import CreateBanner from "../pages/module/cms/Banner/CreateBanner";
->>>>>>> b6169b461f0d339c0d72b092658d8d28138cd6ea
+import ChatList from "../pages/module/chatList/chatList";
+import ChatDetails from "../pages/module/chatList/chatListDetails";
+import CashbackApp from "../pages/module/settings/Cashback";
+import CommissionApp from "../pages/module/settings/Commission";
+import TaxGSTApp from  "../pages/module/settings/Tax&Gst";
+import SetPenaltyApp from "../pages/module/settings/SetPenalty";
 
 function PublicRoute() {
-  const initialPages = [
-    {
-      id: 1,
-      title: "About Us",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Etiam malesuada pellentesque mi et id in scelerisque. Morbi id adipiscing pretium id quam faucibus. Leo at elit quisque elementum...",
-      lastUpdated: "20/09/2025",
-    },
-    {
-      id: 2,
-      title: "Terms & Conditions",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Morbi sed ultrices arcu quis. Dignissim tempus nec ut congue sit tincidunt. Lorem lorem vitae erat nulla tristique nunc senectus scel...",
-      lastUpdated: "10/08/2025",
-    },
-    {
-      id: 3,
-      title: "Privacy Policy",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. At pellentesque commodo volutpat netus pretium nulla amet ut. Gravida nibh imperdiet aliquam mauris consectetur magna vel dia...",
-      lastUpdated: "10/08/2025",
-    },
-    {
-      id: 4,
-      title: "Refund Policy",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Id nisl faucibus interdum habitant morbi vitae odio volutpat magna. Mauris mattis justo tincidunt varius nec. Lacus sapien feugiat or...",
-      lastUpdated: "01/01/2025",
-    },
-    {
-      id: 5,
-      title: "Contact Us",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-      lastUpdated: "12/02/2025",
-    },
-    {
-      id: 6,
-      title: "Shipping Policy",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
-      lastUpdated: "14/03/2025",
-    },
-  ];
-
   const initialUsers = [
     {
       id: 1,
@@ -193,13 +132,12 @@ function PublicRoute() {
       type: "Boys Hostel",
       troom: 6,
       tbed: 30,
-      description:
-        "A well-maintained girls hostel with all modern amenities. Located in a prime area with easy access to colleges and hospitals. Safe and secure environment with 24/7 security.",
+      description: "A well-maintained girls hostel with all modern amenities. Located in a prime area with easy access to colleges and hospitals. Safe and secure environment with 24/7 security.",
       priceDay: 300,
       priceWeekly: 2000,
       priceMonthly: 8000,
       offer: 10,
-      securityDeposit: 15000,
+      securityDeposit: 15000
     },
     {
       id: 2,
@@ -210,13 +148,12 @@ function PublicRoute() {
       type: "Girls Hostel",
       troom: 8,
       tbed: 40,
-      description:
-        "Modern girls hostel with study rooms, WiFi, and nutritious meals. Walking distance from major coaching centers and colleges.",
+      description: "Modern girls hostel with study rooms, WiFi, and nutritious meals. Walking distance from major coaching centers and colleges.",
       priceDay: 350,
       priceWeekly: 2200,
       priceMonthly: 8500,
       offer: 5,
-      securityDeposit: 12000,
+      securityDeposit: 12000
     },
     {
       id: 3,
@@ -227,13 +164,12 @@ function PublicRoute() {
       type: "Co-ed PG",
       troom: 10,
       tbed: 50,
-      description:
-        "Affordable co-ed PG with all facilities including AC rooms, laundry, and mess. Peaceful locality, ideal for students and professionals.",
+      description: "Affordable co-ed PG with all facilities including AC rooms, laundry, and mess. Peaceful locality, ideal for students and professionals.",
       priceDay: 280,
       priceWeekly: 1800,
       priceMonthly: 7500,
       offer: 8,
-      securityDeposit: 10000,
+      securityDeposit: 10000
     },
     {
       id: 4,
@@ -244,13 +180,12 @@ function PublicRoute() {
       type: "Boys Hostel",
       troom: 12,
       tbed: 60,
-      description:
-        "Spacious hostel with gym, recreational room, and hygienic mess. CCTV surveillance and biometric entry for security.",
+      description: "Spacious hostel with gym, recreational room, and hygienic mess. CCTV surveillance and biometric entry for security.",
       priceDay: 320,
       priceWeekly: 2100,
       priceMonthly: 7800,
       offer: 12,
-      securityDeposit: 14000,
+      securityDeposit: 14000
     },
     {
       id: 5,
@@ -261,13 +196,12 @@ function PublicRoute() {
       type: "Girls Hostel",
       troom: 5,
       tbed: 25,
-      description:
-        "Cozy PG for girls with friendly staff, homely food, and individual study tables. Perfect for serious students.",
+      description: "Cozy PG for girls with friendly staff, homely food, and individual study tables. Perfect for serious students.",
       priceDay: 310,
       priceWeekly: 1950,
       priceMonthly: 7900,
       offer: 15,
-      securityDeposit: 13000,
+      securityDeposit: 13000
     },
     {
       id: 6,
@@ -278,14 +212,13 @@ function PublicRoute() {
       type: "Boys Hostel",
       troom: 15,
       tbed: 70,
-      description:
-        "Ideal PG for working professionals. High-speed internet, backup power, and workstations available 24/7.",
+      description: "Ideal PG for working professionals. High-speed internet, backup power, and workstations available 24/7.",
       priceDay: 400,
       priceWeekly: 2500,
       priceMonthly: 9000,
       offer: 10,
-      securityDeposit: 16000,
-    },
+      securityDeposit: 16000
+    }
   ];
 
   const bookingDetails = [
@@ -301,7 +234,7 @@ function PublicRoute() {
       email: "ananya.sharma@example.com",
       dob: "2003-04-15",
       address: "22, Hill Top Residency, Dharampeth, Nagpur - 440010",
-      img: "https://example.com/images/ananya-sharma.jpg",
+      img: "https://example.com/images/ananya-sharma.jpg"
     },
     {
       id: 2,
@@ -315,7 +248,7 @@ function PublicRoute() {
       email: "rahul.verma@example.com",
       dob: "2002-11-10",
       address: "77, Pearl Residency, Hingna Road, Nagpur - 440016",
-      img: "https://example.com/images/rahul-verma.jpg",
+      img: "https://example.com/images/rahul-verma.jpg"
     },
     {
       id: 3,
@@ -329,7 +262,7 @@ function PublicRoute() {
       email: "priya.deshmukh@example.com",
       dob: "2004-01-22",
       address: "88, Lake View Apartments, Pratap Nagar, Nagpur - 440015",
-      img: "https://example.com/images/priya-deshmukh.jpg",
+      img: "https://example.com/images/priya-deshmukh.jpg"
     },
     {
       id: 4,
@@ -343,7 +276,7 @@ function PublicRoute() {
       email: "aditya.kulkarni@example.com",
       dob: "2001-08-30",
       address: "14, Skyline Enclave, IT Hub, Nagpur - 440024",
-      img: "https://example.com/images/aditya-kulkarni.jpg",
+      img: "https://example.com/images/aditya-kulkarni.jpg"
     },
     {
       id: 5,
@@ -357,14 +290,10 @@ function PublicRoute() {
       email: "sneha.patil@example.com",
       dob: "2003-06-05",
       address: "9, Blossom Heights, Trimurti Nagar, Nagpur - 440022",
-      img: "https://example.com/images/sneha-patil.jpg",
-    },
+      img: "https://example.com/images/sneha-patil.jpg"
+    }
   ];
 
-<<<<<<< HEAD
-
-
-=======
   const restaurantListings = [
     {
       id: 1,
@@ -373,8 +302,7 @@ function PublicRoute() {
       address: "123, Green Valley Road, Dharampeth, Nagpur - 440010",
       status: "Rejected",
       foodType: "Veg",
-      description:
-        "A clean and cozy vegetarian restaurant offering homemade-style meals. Known for its hygiene and quick service, popular among college students and families.",
+      description: "A clean and cozy vegetarian restaurant offering homemade-style meals. Known for its hygiene and quick service, popular among college students and families.",
       priceDay: 300,
       priceWeekly: 2000,
       priceMonthly: 8000,
@@ -385,15 +313,15 @@ function PublicRoute() {
       mealPreference: "Breakfast, Lunch, Dinner",
       deliveryTiming: {
         start: "7:00 AM",
-        end: "9:00 AM",
+        end: "9:00 AM"
       },
       includes: [
         "Thali with 2 Sabzis",
         "Dal & Rice",
         "Roti/Chapati",
         "Pickle & Salad",
-        "Sweet Dish (once a week)",
-      ],
+        "Sweet Dish (once a week)"
+      ]
     },
     {
       id: 2,
@@ -402,8 +330,7 @@ function PublicRoute() {
       address: "45, Rosewood Lane, Ramdaspeth, Nagpur - 440012",
       status: "Approved",
       foodType: "Veg, Non-Veg",
-      description:
-        "Multi-cuisine family restaurant offering Indian, Chinese, and Tandoor dishes. Dine-in and quick delivery available within city limits.",
+      description: "Multi-cuisine family restaurant offering Indian, Chinese, and Tandoor dishes. Dine-in and quick delivery available within city limits.",
       priceDay: 350,
       priceWeekly: 2400,
       priceMonthly: 8800,
@@ -414,15 +341,15 @@ function PublicRoute() {
       mealPreference: "Lunch,Dinner",
       deliveryTiming: {
         start: "1:00 PM",
-        end: "3:00 PM",
+        end: "3:00 PM"
       },
       includes: [
         "Butter Chicken / Paneer Butter Masala",
         "Naan / Roti",
         "Biryani",
         "Raita",
-        "Soft Drink (optional)",
-      ],
+        "Soft Drink (optional)"
+      ]
     },
     {
       id: 3,
@@ -431,8 +358,7 @@ function PublicRoute() {
       address: "78, Lake View Society, Pratap Nagar, Nagpur - 440015",
       status: "Pending",
       foodType: "Veg",
-      description:
-        "A health-focused cafe serving low-oil, low-sugar vegetarian meals with fresh ingredients. Ideal for fitness enthusiasts and health-conscious eaters.",
+      description: "A health-focused cafe serving low-oil, low-sugar vegetarian meals with fresh ingredients. Ideal for fitness enthusiasts and health-conscious eaters.",
       priceDay: 280,
       priceWeekly: 1800,
       priceMonthly: 7500,
@@ -443,15 +369,15 @@ function PublicRoute() {
       mealPreference: "Breakfast,Lunch",
       deliveryTiming: {
         start: "6:30 AM",
-        end: "8:30 AM",
+        end: "8:30 AM"
       },
       includes: [
         "Oats Upma",
         "Sprout Salad",
         "Grilled Sandwich",
         "Fruit Bowl",
-        "Detox Juice",
-      ],
+        "Detox Juice"
+      ]
     },
     {
       id: 4,
@@ -460,8 +386,7 @@ function PublicRoute() {
       address: "201, Shankar Nagar, Hingna Road, Nagpur - 440016",
       status: "Approved",
       foodType: "Non-Veg",
-      description:
-        "Premium non-veg dining with classic Indian and Mughlai dishes. Elegant ambience for dine-in and quick delivery options.",
+      description: "Premium non-veg dining with classic Indian and Mughlai dishes. Elegant ambience for dine-in and quick delivery options.",
       priceDay: 420,
       priceWeekly: 2700,
       priceMonthly: 9500,
@@ -472,15 +397,15 @@ function PublicRoute() {
       mealPreference: "Dinner",
       deliveryTiming: {
         start: "7:00 PM",
-        end: "11:00 PM",
+        end: "11:00 PM"
       },
       includes: [
         "Mutton Rogan Josh",
         "Chicken Biryani",
         "Butter Naan",
         "Gulab Jamun",
-        "Mineral Water",
-      ],
+        "Mineral Water"
+      ]
     },
     {
       id: 5,
@@ -489,8 +414,7 @@ function PublicRoute() {
       address: "5, Lotus Apartments, Trimurti Nagar, Nagpur - 440022",
       status: "Rejected",
       foodType: "Veg",
-      description:
-        "Affordable tiffin service for students and working professionals. Home-cooked food delivered fresh daily.",
+      description: "Affordable tiffin service for students and working professionals. Home-cooked food delivered fresh daily.",
       priceDay: 220,
       priceWeekly: 1400,
       priceMonthly: 6000,
@@ -501,9 +425,15 @@ function PublicRoute() {
       mealPreference: "Lunch",
       deliveryTiming: {
         start: "12:00 PM",
-        end: "2:00 PM",
+        end: "2:00 PM"
       },
-      includes: ["Rice", "Chapati (4)", "Dal / Curry", "Dry Veg", "Pickle"],
+      includes: [
+        "Rice",
+        "Chapati (4)",
+        "Dal / Curry",
+        "Dry Veg",
+        "Pickle"
+      ]
     },
     {
       id: 6,
@@ -512,8 +442,7 @@ function PublicRoute() {
       address: "12, Tech Park Road, IT Hub, Nagpur - 440024",
       status: "Approved",
       foodType: "Veg, Non-Veg",
-      description:
-        "Corporate lunch provider with customizable weekly plans. Ideal for office lunches with scheduled delivery.",
+      description: "Corporate lunch provider with customizable weekly plans. Ideal for office lunches with scheduled delivery.",
       priceDay: 380,
       priceWeekly: 2250,
       priceMonthly: 8200,
@@ -524,18 +453,17 @@ function PublicRoute() {
       mealPreference: "Lunch",
       deliveryTiming: {
         start: "12:30 PM",
-        end: "2:00 PM",
+        end: "2:00 PM"
       },
       includes: [
         "Paneer / Chicken Gravy",
         "Rice / Pulao",
         "Chapati",
         "Curd",
-        "Fruit / Sweet",
-      ],
-    },
+        "Fruit / Sweet"
+      ]
+    }
   ];
->>>>>>> b6169b461f0d339c0d72b092658d8d28138cd6ea
 
   const dashboardDatas = [
     {
@@ -580,14 +508,12 @@ function PublicRoute() {
     },
   ];
 
-  const [banners, setBanners] = useState([]);
   const [users, setUsers] = useState(initialUsers);
-  const [pages, setPages] = useState(initialPages);
   const [listingData, setListingData] = useState(pgListings);
   const [booking, setBooking] = useState(bookingDetails);
-  const [restaurants, setRestaurants] = useState(RestaurantData);
+  const [restaurants, setRestaurants] = useState(restaurantListings);
+  const [overView, setOverview] = useState(bookingDetails);
   const [dashboardData, setDashboardData] = useState(dashboardDatas);
-  const [showPopup, setShowPopup] = useState(false);
 
   // Component to render details based on user role
   function RenderDetailsByRole({ users, setUsers }) {
@@ -614,10 +540,10 @@ function PublicRoute() {
   function RenderDetailsByType() {
     const { listing } = useParams();
     if (listing === "pglisting") {
-      return <Details users={listingData} setUsers={setListingData} showPopup={showPopup} setShowPopup={setShowPopup} />;
+      return <Details users={listingData} setUsers={setListingData} />;
     }
     if (listing === "restaurantlisting") {
-      return <Details users={restaurants} setUsers={setRestaurants} showPopup={showPopup} setShowPopup={setShowPopup} />;
+      return <Details users={restaurants} setUsers={setRestaurants} />;
     }
     return <div>Invalid listing type.</div>;
   }
@@ -629,9 +555,7 @@ function PublicRoute() {
       return <EditDetails users={listingData} setUsers={setListingData} />;
     }
     if (listing === "restaurantlisting") {
-      return (
-        <EditTiffinDetails users={restaurants} setUsers={setRestaurants} />
-      );
+      return <EditTiffinDetails users={restaurants} setUsers={setRestaurants} />;
     }
     return <div>Invalid listing type.</div>;
   }
@@ -643,49 +567,24 @@ function PublicRoute() {
       <Route path="/verify-otp" element={<VerifyOTP />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route
-        path="/password-reset-successfully"
-        element={<PasswordResetSuccessfully />}
-      />
-
+      <Route path="/password-reset-successfully" element={<PasswordResetSuccessfully />} />
+      
       {/* Protected Routes with Layout */}
       <Route path="/" element={<Layout />}>
         {/* Dashboard */}
-        <Route
-          path="dashboard"
-          element={
-            <Dashboard users={dashboardData} setUsers={setDashboardData} />
-          }
-        />
+        <Route path="dashboard" element={<Dashboard users={dashboardData} setUsers={setDashboardData} />} />
         <Route path="dashboard/alerts" element={<Alerts />} />
-        <Route path="/dashboard/pg-hostel-overview" element={<OverviewPage title="PG / Hostel Overview" data={pgHostelData} />}/>
-        <Route path="/dashboard/tiffin-restaurant-overview" element={<OverviewPage title="Tiffin / Restaurant Overview" data={tiffinData} />} />
-        <Route path="/dashboard/user-overview" element={<OverviewPage title="User Overview" data={userData} />} />
+
         {/* User Management */}
-        <Route
-          path="users/:role"
-          element={<Owner users={users} setUsers={setUsers} />}
-        />
-        <Route
-          path="users/:role/create"
-          element={<CreateOwner users={users} setUsers={setUsers} />}
-        />
-        <Route
-          path="users/:role/edit/:id"
-          element={<EditOwner users={users} setUsers={setUsers} />}
-        />
-        <Route
-          path="users/:role/:id"
-          element={<RenderDetailsByRole users={users} setUsers={setUsers} />}
-        />
+        <Route path="users/:role" element={<Owner users={users} setUsers={setUsers} />} />
+        <Route path="users/:role/create" element={<CreateOwner users={users} setUsers={setUsers} />} />
+        <Route path="users/:role/edit/:id" element={<EditOwner users={users} setUsers={setUsers} />} />
+        <Route path="users/:role/:id" element={<RenderDetailsByRole users={users} setUsers={setUsers} />} />
 
         {/* Listing Management */}
         <Route path="listings/:listing" element={<RenderListingByType />} />
         <Route path="listings/:listing/:id" element={<RenderDetailsByType />} />
-        <Route
-          path="listings/:listing/edit/:id"
-          element={<RenderEditDetailsByType />}
-        />
+        <Route path="listings/:listing/edit/:id" element={<RenderEditDetailsByType />} />
 
         {/* Offers & Discount */}
         <Route path="offers/coupon" element={<CouponsPage />} />
@@ -696,32 +595,11 @@ function PublicRoute() {
         <Route path="discount" element={<DiscountPage />} />
 
         {/* Booking & Orders */}
-        <Route
-          path="bookings/:booking"
-          element={<Booking users={booking} setUsers={setBooking} />}
-        />
-        <Route
-          path="bookings/:booking/:id"
-          element={<BookingDetails users={booking} setUsers={setBooking} />}
-        />
+        <Route path="bookings/:booking" element={<Booking users={booking} setUsers={setBooking} />} />
+        <Route path="bookings/:booking/:id" element={<BookingDetails users={booking} setUsers={setBooking} />} />
 
         {/* Payment & Wallet */}
-<<<<<<< HEAD
-        <Route path="payments/:payment" element={<OverView users={paymentData}  />} />
-         <Route path="/payments/pending-payouts" element={<HostelPayouts />} />
-         <Route path="/payments/tiffin-pending-payouts" element={<TiffinPayouts />} />
-         <Route path="/payments/transactions" element={<WalletTransactions />} />
-         <Route path="/payments/transactions-details" element={<TransitionDetails />} />
-         <Route path="/payments/payout-history" element={<PayoutHistory />} />
-
-
-        {/* <Route path="payments/:payment" element={<OverView users={paymentData}  />} /> */}
-=======
-        <Route
-          path="payments/:payment"
-          element={<OverView users={overView} setUsers={setOverview} />}
-        />
->>>>>>> b6169b461f0d339c0d72b092658d8d28138cd6ea
+        <Route path="payments/:payment" element={<OverView users={overView} setUsers={setOverview} />} />
 
         {/* Other Features */}
         <Route path="reviews" element={<Reviews />} />
@@ -729,29 +607,11 @@ function PublicRoute() {
         <Route path="chats/:chatId" element={<ChatDetails />} />
         <Route path="security" element={<Security />} />
 
-        {/* CMS */}
-        <Route
-          path="cms/staticpage"
-          element={<StaticPage pages={pages} setPages={setPages} />}
-        />
-        <Route
-          path="cms/staticpage/edit/:id"
-          element={<EditStaticPage pages={pages} setPages={setPages} />}
-        />
-        <Route path="cms/notification" element={<NotificationManagement />} />
-        <Route
-          path="cms/banners"
-          element={<Banner banners={banners} setBanners={setBanners} />}
-        />
-        <Route
-          path="cms/banner/create"
-          element={<CreateBanner setBanners={setBanners} />}
-        />
-
-        <Route
-          path="/cms/banner/edit/:id"
-          element={<EditBanner banners={banners} setBanners={setBanners} />}
-        />
+        {/* settings */}
+        <Route path ="settings/cashback" element={<CashbackApp />} />
+        <Route path="settings/commission" element={<CommissionApp />} />
+        <Route path="settings/Tax & Gst" element={<TaxGSTApp />} />
+        <Route path="settings/Set Penalty" element={<SetPenaltyApp />} />
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFound />} />

@@ -1,7 +1,4 @@
-<<<<<<< HEAD:src/pages/module/Payment & Wallet/OverView.jsx
-=======
 import Sidebar from "../../../../components/Layouts/Sidebar";
->>>>>>> b6169b461f0d339c0d72b092658d8d28138cd6ea:src/pages/module/payment&Wallet/paymentOverview/OverView.jsx
 import { IoIosSearch } from "react-icons/io";
 import { useState } from "react";
 import { PiFunnel } from "react-icons/pi";
@@ -10,12 +7,7 @@ import { FiEye } from "react-icons/fi";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 
-<<<<<<< HEAD:src/pages/module/Payment & Wallet/OverView.jsx
-import NotFound from "../offers&Discount/NotFound";
-import paymentConfig from "./PaymentConfig";
-=======
 import paymentConfig from "../PaymentConfig";
->>>>>>> b6169b461f0d339c0d72b092658d8d28138cd6ea:src/pages/module/payment&Wallet/paymentOverview/OverView.jsx
 
 // ✅ Sample payment transactions (replace with API if needed)
 const paymentData = [
