@@ -17,7 +17,7 @@ function OverView({ users, setUsers }) {
 
   const [filterOpen, setFilterOpen] = useState(true); // ✅ Filter box open by default
   const [selectedStatus, setSelectedStatus] = useState(["Today"]); 
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);  
   const [userToDelete, setUserToDelete] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
