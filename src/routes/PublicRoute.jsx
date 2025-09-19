@@ -22,11 +22,11 @@ import VerifyOTP from "../pages/auth/VerifyOTP";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
 import PasswordResetSuccessfully from "../pages/auth/PasswordResetSuccefully";
-import Dashboard from "../pages/module/dashBoard/Dashboard";
-import Alerts from "../pages/module/dashboard/Alerts";
+import Dashboard from "../pages/module/dashboard/Dashboard";
+// import Alerts from "../pages/module/dashboard/Alerts";
 import Reviews from "../pages/module/ratings&Review/Reviews";
 import Security from "../pages/module/security&Logs/Security&Log";
-import ChatList from "../pages/module/chatList/ChatList";
+import ChatList from " ../pages/module/chatList/ChatList";
 import ChatDetails from "../pages/module/chatList/ChatListDetails";
 import Banner from "../pages/module/cms/Banner/banners";
 import StaticPage from "../pages/module/cms/StaticPage/StaticPage";
@@ -638,7 +638,7 @@ function PublicRoute() {
             <Dashboard users={dashboardData} setUsers={setDashboardData} />
           }
         />
-        <Route path="dashboard/alerts" element={<Alerts />} />
+        {/* <Route path="dashboard/alerts" element={<Alerts />} /> */}
 
         {/* User Management */}
         <Route
