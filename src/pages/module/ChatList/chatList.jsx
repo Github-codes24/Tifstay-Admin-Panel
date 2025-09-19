@@ -3,15 +3,12 @@ import { PiFunnel } from "react-icons/pi";
 import { IoMdClose } from "react-icons/io";
 import { FiEye } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-
 function ChatList() {
       const navigate = useNavigate();
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState([]);
-
   const [currentPage, setCurrentPage] = useState(1);
   const chatsPerPage = 5;
-
   const chatData = [
     {
       id: 1,
