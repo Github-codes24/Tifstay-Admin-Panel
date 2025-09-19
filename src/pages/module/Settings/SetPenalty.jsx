@@ -172,8 +172,7 @@ function SettingsUpdatedModal({ isOpen }) {
         <p className="text-gray-600 mb-6">Your commission settings have been successfully updated.</p>
         
       </div>
-      <h1> ok mam </h1> 
-    </div>
+      </div>
   );
 }
 

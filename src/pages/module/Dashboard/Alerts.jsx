@@ -114,8 +114,7 @@ const alerts = [
           </div>
         </div>
       </div>
-      <h1> ok odne </h1> 
-    </div>
+      </div>
   );
 };
 
