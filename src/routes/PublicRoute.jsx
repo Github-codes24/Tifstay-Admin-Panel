@@ -547,7 +547,7 @@ function PublicRoute() {
       id: 4,
       name: "Maharashtrian Khana",
       type: "Tiffin",
-      phone: "9876543210",
+      phone: "98765432101111111",
       address: "Near VNIT",
       status: "Rejected",
     },
