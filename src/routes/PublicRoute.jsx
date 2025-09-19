@@ -23,7 +23,7 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
 import PasswordResetSuccessfully from "../pages/auth/PasswordResetSuccefully";
 import Dashboard from "../pages/module/dashboard/Dashboard";
-// import Alerts from "../pages/module/dashboard/Alerts";
+import Alerts from "../pages/module/dashboard/Alerts";
 import Reviews from "../pages/module/ratings&Review/Reviews";
 import Security from "../pages/module/security&Logs/Security&Log";
 import ChatList from " ../pages/module/chatList/ChatList";
