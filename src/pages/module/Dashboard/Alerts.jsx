@@ -6,10 +6,10 @@ import { TbCalendarTime } from "react-icons/tb";
 import { TbMessageQuestion } from "react-icons/tb";
 import { FaRegClock, FaRegStar } from "react-icons/fa";
 
+
 const Alerts = () => {
   const navigate = useNavigate();
-
-  const alerts = [
+const alerts = [
     {
       id: 1,
       title: "Vendor license expired",
@@ -115,7 +115,7 @@ const Alerts = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 
