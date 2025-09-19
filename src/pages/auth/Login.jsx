@@ -2,12 +2,10 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { MdEmail, MdLock } from "react-icons/md";
-import { userDataContext } from "../../context/userContext.jsx";
 import bg from "../../assets/image.png";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { serverUrl, setUserData } = useContext(userDataContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
