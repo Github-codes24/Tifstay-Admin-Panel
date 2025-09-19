@@ -207,7 +207,7 @@ function ChatList() {
           </div>
         </div>
       </div>
-    </div>
+       </div>
   );
 }
 

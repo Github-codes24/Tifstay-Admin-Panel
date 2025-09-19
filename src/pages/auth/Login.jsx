@@ -1,40 +1,38 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { MdEmail, MdLock } from "react-icons/md";
-import { userDataContext } from "../../context/userContext.jsx";
 import bg from "../../assets/image.png";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { serverUrl, setUserData } = useContext(userDataContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [password, setPassword] = useState("");
-  const [err, setErr] = useState("");
+  const [err] = useState("");
 
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    setErr("");
-    setLoading(true);
-    try {
-      let result = await axios.post(
-        `${serverUrl}/api/auth/signin`,
-        { email, password },
-        { withCredentials: true }
-      );
-      setUserData(result.data);
-      setLoading(false);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      setUserData(null);
-      setLoading(false);
-      setErr(error.response?.data?.message || "Something went wrong");
-    }
-  };
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
+  //   setErr("");
+  //   setLoading(true);
+  //   try {
+  //     let result = await axios.post(
+  //       `${serverUrl}/api/auth/signin`,
+  //       { email, password },
+  //       { withCredentials: true }
+  //     );
+  //     setUserData(result.data);
+  //     setLoading(false);
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //     setUserData(null);
+  //     setLoading(false);
+  //     setErr(error.response?.data?.message || "Something went wrong");
+  //   }
+  // };
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[#DFE1E6]">
