@@ -1,155 +1,177 @@
-
-import React, { useState,} from "react";
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Users, 
-  Star, 
-  Home, 
-  User, 
-  Settings, 
-  FileText, 
-  MessageSquare, 
-  Calendar,
-  ChevronLeft,
-  ChevronRight,
-  Activity,
-  PieChart,
-  LineChart,
-  Target,
-  Award,
-  Clock,
-  Plus
-} from "lucide-react";
-
-// Custom CSS animations
-const AnimationCSS = () => (
-  <style>{`
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
+import React, { useState, useEffect } from "react";
+  import { 
+    BarChart3, 
+    TrendingUp, 
+    Users, 
+    Star, 
+    Home, 
+    User, 
+    Settings, 
+    FileText, 
+    MessageSquare, 
+    Calendar,
+    ChevronLeft,
+    ChevronRight,
+    Activity,
+    PieChart,
+    LineChart,
+    Target,
+    Award,
+    Clock,
+    Plus
+  } from "lucide-react";
+  
+  // Custom CSS animations
+  const AnimationCSS = () => (
+    <style>{`
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
-      to {
-        opacity: 1;
-        transform: translateX(0);
+      
+      @keyframes iconBounce {
+        0%, 20%, 50%, 80%, 100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
       }
-    }
-    
-    @keyframes iconBounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
+      
+      @keyframes textReveal {
+        from {
+          opacity: 0;
+          transform: translateX(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
-      40% {
-        transform: translateY(-10px);
+      
+      @keyframes shimmer {
+        0% {
+          background-position: -200px 0;
+        }
+        100% {
+          background-position: calc(200px + 100%) 0;
+        }
       }
-      60% {
-        transform: translateY(-5px);
+      
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
       }
-    }
-    
-    @keyframes textReveal {
-      from {
-        opacity: 0;
-        transform: translateX(10px);
+      
+      .animate-slide-in-left {
+        animation: slideInLeft 0.5s ease-out;
       }
-      to {
-        opacity: 1;
-        transform: translateX(0);
+      
+      .animate-icon-bounce {
+        animation: iconBounce 1s ease-in-out;
       }
-    }
-    
-    @keyframes shimmer {
-      0% {
-        background-position: -200px 0;
+      
+      .animate-text-reveal {
+        animation: textReveal 0.3s ease-out;
       }
-      100% {
-        background-position: calc(200px + 100%) 0;
+      
+      .animate-shimmer {
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background-size: 200px 100%;
+        animation: shimmer 2s infinite;
       }
-    }
-    
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
+      
+      .animate-pulse-custom {
+        animation: pulse 2s ease-in-out infinite;
       }
-      50% {
+      
+      .card-hover-effect {
+        transition: all 0.2s ease-in-out;
+      }
+      
+      .card-hover-effect:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      .micro-bounce {
+        transition: transform 0.15s ease-in-out;
+      }
+      
+      .micro-bounce:hover {
         transform: scale(1.05);
       }
-    }
-    
-    .animate-slide-in-left {
-      animation: slideInLeft 0.5s ease-out;
-    }
-    
-    .animate-icon-bounce {
-      animation: iconBounce 1s ease-in-out;
-    }
-    
-    .animate-text-reveal {
-      animation: textReveal 0.3s ease-out;
-    }
-    
-    .animate-shimmer {
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      background-size: 200px 100%;
-      animation: shimmer 2s infinite;
-    }
-    
-    .animate-pulse-custom {
-      animation: pulse 2s ease-in-out infinite;
-    }
-    
-    .card-hover-effect {
-      transition: all 0.2s ease-in-out;
-    }
-    
-    .card-hover-effect:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    
-    .micro-bounce {
-      transition: transform 0.15s ease-in-out;
-    }
-    
-    .micro-bounce:hover {
-      transform: scale(1.05);
-    }
-  `}</style>
-);
-
-// Sidebar Component
-const Sidebar = ({ isOpen, setIsOpen, activeItem, setActiveItem, isMobile }) => {
-  const [expandedDashboard, setExpandedDashboard] = useState(false);
-
-  const dashboardSubItems = [
-    { title: "Admin Dashboard", url: "/dashboard/admin", icon: User, badge: null, color: "blue" },
-    { title: "Super Admin", url: "/dashboard/superadmin", icon: Settings, badge: null, color: "purple" },
-    { title: "Owner Dashboard", url: "/dashboard/owner", icon: Star, badge: null, color: "yellow" }
-  ];
-
-  const navigationItems = [
-    { title: "Dashboard", url: "/", icon: Home, badge: null, color: "blue", hasSubmenu: true },
-    { title: "Analytics", url: "/analytics", icon: BarChart3, badge: "New", color: "purple" },
-    { title: "Projects", url: "/projects", icon: FileText, badge: "12", color: "green" },
-    { title: "Messages", url: "/messages", icon: MessageSquare, badge: "3", color: "orange" },
-    { title: "Calendar", url: "/calendar", icon: Calendar, badge: null, color: "red" },
-    { title: "Profile", url: "/profile", icon: User, badge: null, color: "pink" },
-    { title: "Favorites", url: "/favorites", icon: Star, badge: null, color: "yellow" },
-    { title: "Settings", url: "/settings", icon: Settings, badge: null, color: "gray" },
-  ];
-
-  // Auto-expand dashboard if a dashboard sub-item is active
-  React.useEffect(() => {
-    if (activeItem.startsWith('/dashboard/')) {
-      setExpandedDashboard(true);
-    }
-  }, [activeItem]);
-
-  const handleItemClick = (url) => {
-    if (url === "/") {
-      // When clicking Dashboard, open Admin Dashboard directly and expand submenu
-      setActiveItem("/dashboard/admin");
+    `}</style>
+  );
+  
+  // Sidebar Component
+  const Sidebar = ({ isOpen, setIsOpen, activeItem, setActiveItem, isMobile }) => {
+    const [expandedDashboard, setExpandedDashboard] = useState(false);
+  
+    const dashboardSubItems = [
+      { title: "Admin Dashboard", url: "/dashboard/admin", icon: User, badge: null, color: "blue" },
+      { title: "Super Admin", url: "/dashboard/superadmin", icon: Settings, badge: null, color: "purple" },
+      { title: "Owner Dashboard", url: "/dashboard/owner", icon: Star, badge: null, color: "yellow" }
+    ];
+  
+    const navigationItems = [
+      { title: "Dashboard", url: "/", icon: Home, badge: null, color: "blue", hasSubmenu: true },
+      { title: "Analytics", url: "/analytics", icon: BarChart3, badge: "New", color: "purple" },
+      { title: "Projects", url: "/projects", icon: FileText, badge: "12", color: "green" },
+      { title: "Messages", url: "/messages", icon: MessageSquare, badge: "3", color: "orange" },
+      { title: "Calendar", url: "/calendar", icon: Calendar, badge: null, color: "red" },
+      { title: "Profile", url: "/profile", icon: User, badge: null, color: "pink" },
+      { title: "Favorites", url: "/favorites", icon: Star, badge: null, color: "yellow" },
+      { title: "Settings", url: "/settings", icon: Settings, badge: null, color: "gray" },
+    ];
+  
+    // Auto-expand dashboard if a dashboard sub-item is active
+    useEffect(() => {
+      if (activeItem.startsWith('/dashboard/')) {
+        setExpandedDashboard(true);
+      }
+    }, [activeItem]);
+  
+    const handleItemClick = (url) => {
+      if (url === "/") {
+        // When clicking Dashboard, open Admin Dashboard directly and expand submenu
+        setActiveItem("/dashboard/admin");
+        setExpandedDashboard(true);
+        if (isMobile) {
+          setIsOpen(false);
+        }
+        return;
+      }
+      
+      // Collapse dashboard submenu when clicking other modules
+      setExpandedDashboard(false);
+      setActiveItem(url);
+      if (isMobile) {
+        setIsOpen(false);
+      }
+    };
+  
+    const handleDashboardToggle = (e) => {
+      e.stopPropagation(); // Prevent triggering the main dashboard click
+      setExpandedDashboard(!expandedDashboard);
+    };
+  
+    const handleDashboardSubItemClick = (url) => {
+      setActiveItem(url);
+      // Keep submenu expanded when switching between dashboard types
       setExpandedDashboard(true);
       if (isMobile) {
         setIsOpen(false);
@@ -339,4 +361,3 @@ const Sidebar = ({ isOpen, setIsOpen, activeItem, setActiveItem, isMobile }) => 
   };
   
   export default Sidebar;
-  
