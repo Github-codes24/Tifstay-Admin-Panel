@@ -26,8 +26,8 @@ import Dashboard from "../pages/module/dashboard/Dashboard";
  import Alerts from "../pages/module/dashboard/Alerts";
 import Reviews from "../pages/module/ratings&Review/Reviews";
 import Security from "../pages/module/security&Logs/Security&Log";
-import ChatList from " ../pages/module/chatList/ChatList";
-import ChatDetails from "../pages/module/chatList/ChatListDetails";
+ import ChatList from " ../pages/module/chatList/ChatList";
+ import ChatDetails from "../pages/module/chatList/ChatListDetails";
 import Banner from "../pages/module/cms/Banner/banners";
 import StaticPage from "../pages/module/cms/StaticPage/StaticPage";
 import EditStaticPage from "../pages/module/cms/StaticPage/EditStaticPage";
@@ -639,7 +639,7 @@ function PublicRoute() {
           }
         />
         {/* <Route path="dashboard/alerts" element={<Alerts />} /> */}
-
+     
         {/* User Management */}
         <Route
           path="users/:role"
