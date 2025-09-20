@@ -20,7 +20,7 @@
     Clock,
     Plus
   } from "lucide-react";
-  
+     
   // Custom CSS animations
   const AnimationCSS = () => (
     <style>{`
