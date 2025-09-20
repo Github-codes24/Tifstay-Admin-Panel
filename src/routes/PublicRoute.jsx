@@ -633,7 +633,7 @@ function PublicRoute() {
       <Route path="/" element={<Layout />}>
         {/* Dashboard */}
         <Route
-          path="dashboard"
+          path="/"
           element={
             <Dashboard users={dashboardData} setUsers={setDashboardData} />
           }
