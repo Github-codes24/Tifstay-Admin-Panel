@@ -11,7 +11,6 @@ function CashbackSettings({ onEdit, cashbackData }) {
           Settings / Cashback Settings
         </div>
       </div>
-
       {/* Main Content */}
       <div className="p-6 bg-gray-50 min-h-screen">
         <div className="w-full min-h-[600px] p-6 rounded-[8px] bg-white shadow flex flex-col gap-6 border border-[#A5A5A5]">

@@ -6,6 +6,11 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
+<<<<<<< HEAD
+=======
+import logo from "../../../../assets/image.png";
+import { FaRegEdit } from "react-icons/fa";
+>>>>>>> f04214e236d23429ff477329eb6d2598155e3748
 
 import paymentConfig from "../PaymentConfig";
 
@@ -49,11 +54,22 @@ const paymentData = [
   },
 ];
 
+<<<<<<< HEAD
 function OverView() {
   const { payment } = useParams();
   const cfg = paymentConfig[payment];
+=======
+  const [filterOpen, setFilterOpen] = useState(true); // ✅ Filter box open by default
+  const [selectedStatus, setSelectedStatus] = useState(["Today"]); 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);  
+  const [userToDelete, setUserToDelete] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5;
+>>>>>>> f04214e236d23429ff477329eb6d2598155e3748
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
+
 
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(["Today"]);
@@ -92,6 +108,7 @@ function OverView() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="flex-1 outline-none text-[16px] font-medium placeholder-gray-400"
           />
+          <h1>hk</h1>
         </div>
       </div>
 

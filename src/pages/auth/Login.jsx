@@ -1,41 +1,47 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { MdEmail, MdLock } from "react-icons/md";
+<<<<<<< HEAD
 import { UserDataContext } from "../../context/userContext";
+=======
+>>>>>>> f04214e236d23429ff477329eb6d2598155e3748
 import bg from "../../assets/image.png";
 import axios from "axios";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+<<<<<<< HEAD
   const { serverUrl, setUserData } = useContext(UserDataContext);
+=======
+>>>>>>> f04214e236d23429ff477329eb6d2598155e3748
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [password, setPassword] = useState("");
-  const [err, setErr] = useState("");
+  const [err] = useState("");
 
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    setErr("");
-    setLoading(true);
-    try {
-      let result = await axios.post(
-        `${serverUrl}/api/auth/signin`,
-        { email, password },
-        { withCredentials: true }
-      );
-      setUserData(result.data);
-      setLoading(false);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      setUserData(null);
-      setLoading(false);
-      setErr(error.response?.data?.message || "Something went wrong");
-    }
-  };
+  // const handleSignIn = async (e) => {
+  //   e.preventDefault();
+  //   setErr("");
+  //   setLoading(true);
+  //   try {
+  //     let result = await axios.post(
+  //       `${serverUrl}/api/auth/signin`,
+  //       { email, password },
+  //       { withCredentials: true }
+  //     );
+  //     setUserData(result.data);
+  //     setLoading(false);
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //     setUserData(null);
+  //     setLoading(false);
+  //     setErr(error.response?.data?.message || "Something went wrong");
+  //   }
+  // };
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[#DFE1E6]">

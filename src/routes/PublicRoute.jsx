@@ -23,15 +23,26 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
 import PasswordResetSuccessfully from "../pages/auth/PasswordResetSuccefully";
 import Dashboard from "../pages/module/dashBoard/Dashboard";
-import Alerts from "../pages/module/dashBoard/Alerts";
+import Alerts from "../pages/module/dashboard/Alerts";
 import Reviews from "../pages/module/ratings&Review/Reviews";
 import Security from "../pages/module/security&Logs/Security&Log";
+<<<<<<< HEAD
 import ChatList from "../pages/module/chatList/chatList";
 import ChatDetails from "../pages/module/chatList/chatListDetails";
 import CashbackApp from "../pages/module/settings/Cashback";
 import CommissionApp from "../pages/module/settings/Commission";
 import TaxGSTApp from  "../pages/module/settings/Tax&Gst";
 import SetPenaltyApp from "../pages/module/settings/SetPenalty";
+=======
+import ChatList from "../pages/module/chatList/ChatList";
+import ChatDetails from "../pages/module/chatList/ChatListDetails";
+import Banner from "../pages/module/cms/Banner/banners";
+import StaticPage from "../pages/module/cms/StaticPage/StaticPage";
+import EditStaticPage from "../pages/module/cms/StaticPage/EditStaticPage";
+import NotificationManagement from "../pages/module/cms/notifiactionManagment/NotificationManagement";
+import EditBanner from "../pages/module/cms/Banner/EditBanner";
+import CreateBanner from "../pages/module/cms/Banner/CreateBanner";
+>>>>>>> f04214e236d23429ff477329eb6d2598155e3748
 
 function PublicRoute() {
   const initialUsers = [
@@ -494,7 +505,7 @@ function PublicRoute() {
       id: 4,
       name: "Maharashtrian Khana",
       type: "Tiffin",
-      phone: "9876543210",
+      phone: "98765432101111111",
       address: "Near VNIT",
       status: "Rejected",
     },
